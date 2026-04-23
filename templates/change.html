@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Mise à jour du compte</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    font-family:'Inter',sans-serif;
+    background:#ffffff;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+}
+
+/* SAME CARD STYLE */
+.container{
+    display:flex;
+    width:1120px;
+    height:580px;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 25px 60px rgba(0,0,0,0.10);
+    border:1px solid #e5e7eb;
+}
+
+/* LEFT (FORM SIDE - SAME AS LOGIN) */
+.left{
+    flex:1;
+    background:#ffffff;
+    padding:90px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    position:relative;
+}
+
+.top-left{
+    position:absolute;
+    top:25px;
+    left:30px;
+    font-size:12px;
+    color:#94a3b8;
+    font-weight:500;
+}
+
+h2{
+    font-size:42px;
+    margin:0;
+    color:#0f172a;
+    font-weight:700;
+    letter-spacing:-0.8px;
+}
+
+p{
+    margin-top:10px;
+    margin-bottom:35px;
+    color:#64748b;
+    font-size:16px;
+    font-weight:500;
+}
+
+/* INPUTS */
+input{
+    width:100%;
+    padding:18px;
+    margin-top:16px;
+    border-radius:12px;
+    border:2px solid #e5e7eb;
+    font-size:16px;
+    font-weight:550;
+    transition:0.2s;
+}
+
+input:focus{
+    outline:none;
+    border-color:#1e40af;
+    box-shadow:0 0 0 4px rgba(30,64,175,0.10);
+}
+
+/* BUTTON */
+button{
+    width: 40;
+    padding:18px;
+    margin-top:22px;
+    border:none;
+    border-radius:12px;
+
+    font-size:16px;
+    font-weight:600;
+    letter-spacing:0.3px;
+
+    color:white;
+    cursor:pointer;
+
+    background:linear-gradient(135deg,#1e40af,#2563eb,#3b82f6);
+
+    box-shadow:0 12px 25px rgba(37,99,235,0.25);
+    transition:0.25s ease;
+}
+
+button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 18px 35px rgba(37,99,235,0.35);
+}
+
+/* RIGHT PANEL (SAME STYLE) */
+.right{
+    flex:1;
+    background:linear-gradient(135deg,#0f172a,#1e3a8a,#2563eb);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:90px;
+    color:white;
+    position:relative;
+}
+
+.top-right{
+    position:absolute;
+    top:25px;
+    right:30px;
+    font-size:12px;
+    color:rgba(255,255,255,0.7);
+    font-weight:500;
+}
+
+.right h3{
+    font-size:34px;
+    margin-bottom:15px;
+    font-weight:700;
+    color:white;
+}
+
+.right p{
+    font-size:16px;
+    line-height:1.7;
+    font-weight:500;
+    color:rgba(255,255,255,0.88);
+}
+
+/* FOOTER */
+.footer{
+    margin-top:25px;
+    display:flex;
+    gap:28px;
+    font-size:13px;
+    color:#64748b;
+    font-weight:500;
+}
+
+.footer span{
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.footer span:hover{
+    color:#1e40af;
+}
+
+.info{
+    margin-top:8px;
+    font-size:12px;
+    color:#94a3b8;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- LEFT -->
+    <div class="left">
+
+        <div class="top-left">Secure Platform • Settings</div>
+
+        <h2>Mise à jour</h2>
+        <p>Modifiez vos informations de sécurité</p>
+
+        <form method="post">
+            <input name="email" placeholder="Nouvel email" required>
+            <input name="old_pass" type="password" placeholder="Ancien mot de passe" required>
+            <input name="new_pass" type="password" placeholder="Nouveau mot de passe" required>
+            <button>Mettre à jour</button>
+        </form>
+
+    </div>
+
+    <!-- RIGHT -->
+    <div class="right">
+
+        <div class="top-right">Security Panel</div>
+
+        <h3>Sécurité du compte</h3>
+
+        <p>
+            Vos informations sont protégées par un système sécurisé de vérification
+            et de chiffrement avancé.
+        </p>
+
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    <span>Utilisation</span>
+    <span>Confidentialité</span>
+    <span>Support</span>
+    <span>Contact</span>
+</div>
+
+<div class="info">
+    © 2026 - Plateforme sécurisée professionnelle
+</div>
+
+</body>
+</html>

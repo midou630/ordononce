@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Réinitialiser mot de passe</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    font-family:'Inter',sans-serif;
+    background:#ffffff;
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+/* CARD */
+.container{
+    display:flex;
+    width:1120px;
+    height:580px;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 25px 60px rgba(0,0,0,0.10);
+    border:2px solid #e5e7eb;
+}
+
+/* LEFT */
+.left{
+    flex:1;
+    background:#ffffff;
+    padding:90px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+h2{
+    font-size:40px;
+    margin:0;
+    color:#0f172a;
+    font-weight:700;
+}
+
+p{
+    margin-top:10px;
+    margin-bottom:30px;
+    color:#64748b;
+}
+
+/* INPUT */
+input{
+    width:100%;
+    padding:18px;
+    margin-top:16px;
+    border-radius:12px;
+    border:2px solid #e5e7eb;
+    font-size:16px;
+    font-weight:500;
+}
+
+input:focus{
+    outline:none;
+    border-color:#1e40af;
+    box-shadow:0 0 0 4px rgba(30,64,175,0.10);
+}
+
+/* BUTTON */
+button{
+    width:100%;
+    padding:18px;
+    margin-top:22px;
+    border:none;
+    border-radius:12px;
+    font-size:16px;
+    font-weight:700;
+    color:white;
+    cursor:pointer;
+    background:linear-gradient(135deg,#1e40af,#2563eb,#3b82f6);
+    box-shadow:0 14px 28px rgba(37,99,235,0.25);
+    transition:0.25s ease;
+}
+
+button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 18px 40px rgba(37,99,235,0.35);
+}
+
+/* RIGHT */
+.right{
+    flex:1;
+    background:linear-gradient(135deg,#0f172a,#1e3a8a,#2563eb);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:90px;
+    color:white;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="left">
+
+        <h2>Réinitialisation</h2>
+        <p>Entrez le code et votre nouveau mot de passe</p>
+
+        <form method="post">
+            <input name="code" placeholder="Code reçu par email" required>
+            <input name="new_pass" type="password" placeholder="Nouveau mot de passe" required>
+            <button>Changer mot de passe</button>
+        </form>
+
+    </div>
+
+    <div class="right">
+        <h3>Vérification sécurisée</h3>
+        <p>
+            Votre identité est vérifiée avant toute modification pour garantir la sécurité du compte.
+        </p>
+    </div>
+
+</div>
+
+</body>
+</html>

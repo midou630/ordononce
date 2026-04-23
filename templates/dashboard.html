@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    font-family:'Inter',sans-serif;
+    background:#ffffff;
+}
+
+/* TOP BAR */
+.nav{
+    height:70px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 40px;
+    border-bottom:1px solid #e5e7eb;
+}
+
+.logo{
+    font-weight:700;
+    color:#1e40af;
+    font-size:18px;
+}
+
+.nav-links{
+    display:flex;
+    gap:20px;
+    align-items:center;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#64748b;
+    font-weight:500;
+    font-size:14px;
+    transition:0.2s;
+}
+
+.nav-links a:hover{
+    color:#1e40af;
+}
+
+/* BUTTON STYLE */
+.logout{
+    background:linear-gradient(135deg,#1e40af,#2563eb,#3b82f6);
+    color:white;
+    border:none;
+    padding:10px 16px;
+    border-radius:10px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.logout:hover{
+    transform:translateY(-1px);
+}
+
+/* CONTENT */
+.container{
+    padding:50px;
+}
+
+h1{
+    font-size:34px;
+    color:#0f172a;
+    margin-bottom:10px;
+}
+
+p{
+    color:#64748b;
+}
+
+/* GRID */
+.grid{
+    margin-top:30px;
+    display:flex;
+    gap:20px;
+}
+
+/* CARD (same style feel as login) */
+.card{
+    flex:1;
+    border:2px solid #e5e7eb;
+    border-radius:14px;
+    padding:25px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.05);
+    transition:0.2s;
+}
+
+.card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 25px 50px rgba(0,0,0,0.08);
+}
+
+.card h3{
+    margin:0;
+    color:#1e40af;
+    font-weight:700;
+}
+
+.card p{
+    margin-top:10px;
+    color:#64748b;
+    font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<div class="nav">
+
+    <div class="logo">SecureApp</div>
+
+    <div class="nav-links">
+        <a href="/change-password">Changer mot de passe</a>
+        <a href="/logout">Déconnexion</a>
+    </div>
+
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+
+    <h1>Bienvenue 👋</h1>
+    <p>Votre espace professionnel sécurisé</p>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>Compte</h3>
+            <p>Gérez vos informations personnelles</p>
+        </div>
+
+        <div class="card">
+            <h3>Sécurité</h3>
+            <p>Paramètres de sécurité et accès</p>
+        </div>
+
+        <div class="card">
+            <h3>Activité</h3>
+            <p>Historique et utilisation</p>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

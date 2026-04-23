@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Vérification</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    font-family:'Inter',sans-serif;
+    background:#ffffff;
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+/* CARD */
+.container{
+    display:flex;
+    width:900px;
+    height:520px;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 25px 60px rgba(0,0,0,0.10);
+    border:2px solid #e5e7eb;
+}
+
+/* LEFT */
+.left{
+    flex:1;
+    background:#ffffff;
+    padding:80px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+h2{
+    font-size:40px;
+    margin:0;
+    color:#0f172a;
+    font-weight:700;
+}
+
+p{
+    margin-top:10px;
+    margin-bottom:30px;
+    color:#64748b;
+    font-size:15px;
+}
+
+/* INPUT */
+input{
+    width:100%;
+    padding:18px;
+    margin-top:16px;
+    border-radius:12px;
+    border:2px solid #e5e7eb;
+    font-size:16px;
+    font-weight:500;
+    transition:0.2s ease;
+}
+
+input:focus{
+    outline:none;
+    border-color:#1e40af;
+    box-shadow:0 0 0 4px rgba(30,64,175,0.10);
+}
+
+/* BUTTON */
+button{
+    width:100%;
+    padding:18px;
+    margin-top:22px;
+
+    border:none;
+    border-radius:12px;
+
+    font-size:16px;
+    font-weight:700;
+
+    color:white;
+    cursor:pointer;
+
+    background:linear-gradient(135deg,#1e40af,#2563eb,#3b82f6);
+
+    box-shadow:0 14px 28px rgba(37,99,235,0.25);
+    transition:0.25s ease;
+}
+
+button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 18px 40px rgba(37,99,235,0.35);
+}
+
+/* RIGHT */
+.right{
+    flex:1;
+    background:linear-gradient(135deg,#0f172a,#1e3a8a,#2563eb);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:80px;
+    color:white;
+}
+
+.right h3{
+    font-size:32px;
+    font-weight:700;
+}
+
+.right p{
+    font-size:15px;
+    line-height:1.6;
+    color:rgba(255,255,255,0.85);
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- LEFT -->
+    <div class="left">
+
+        <h2>Vérification</h2>
+        <p>Entrez le code envoyé par email</p>
+
+        <form method="post">
+
+            <input name="code" placeholder="Code de vérification" required>
+
+            <button>Confirmer</button>
+
+        </form>
+
+    </div>
+
+    <!-- RIGHT -->
+    <div class="right">
+
+        <h3>Sécurité du compte</h3>
+
+        <p>
+            Pour protéger votre compte, nous vérifions votre identité via un code
+            envoyé à votre adresse email sécurisée.
+        </p>
+
+    </div>
+
+</div>
+
+</body>
+</html>

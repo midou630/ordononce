@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Connexion</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    font-family:'Inter',sans-serif;
+    background:#ffffff;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+}
+
+/* CARD */
+.container{
+    display:flex;
+    width:1120px;
+    height:580px;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 25px 60px rgba(0,0,0,0.10);
+    border:2px solid #e5e7eb;
+}
+
+/* LEFT */
+.left{
+    flex:1;
+    background:#ffffff;
+    padding:90px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    position:relative;
+}
+
+h2{
+    font-size:42px;
+    margin:0;
+    color:#0f172a;
+    font-weight:700;
+    letter-spacing:-0.8px;
+}
+
+p{
+    margin-top:10px;
+    margin-bottom:35px;
+    color:#64748b;
+    font-size:16px;
+    font-weight:500;
+}
+
+/* INPUTS */
+input{
+    width:100%;
+    padding:18px;
+    margin-top:16px;
+    border-radius:12px;
+    border:2px solid #e5e7eb;
+    font-size:16px;
+    font-weight:500;
+    transition:0.2s ease;
+}
+
+input:focus{
+    outline:none;
+    border-color:#1e40af;
+    box-shadow:0 0 0 4px rgba(30,64,175,0.10);
+}
+
+/* BUTTON */
+button{
+    width:100%;
+    display:block;
+
+    padding:18px;
+    margin-top:22px;
+
+    border:none;
+    border-radius:12px;
+
+    font-size:16px;
+    font-weight:700;
+    letter-spacing:0.5px;
+
+    font-family:'Inter',sans-serif;
+
+    color:white;
+    cursor:pointer;
+
+    background:linear-gradient(135deg,#1e40af,#2563eb,#3b82f6);
+
+    box-shadow:0 14px 28px rgba(37,99,235,0.25);
+    transition:0.25s ease;
+}
+
+button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 18px 40px rgba(37,99,235,0.35);
+}
+
+/* RIGHT PANEL */
+.right{
+    flex:1;
+    background:linear-gradient(135deg,#0f172a,#1e3a8a,#2563eb);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:90px;
+    color:white;
+    position:relative;
+}
+
+.right h3{
+    font-size:34px;
+    margin-bottom:15px;
+    font-weight:700;
+    color:white;
+}
+
+.right p{
+    font-size:16px;
+    line-height:1.7;
+    font-weight:500;
+    color:rgba(255,255,255,0.88);
+}
+
+/* TOP LABELS */
+.top-left{
+    position:absolute;
+    top:25px;
+    left:30px;
+    font-size:12px;
+    color:#94a3b8;
+    font-weight:500;
+}
+
+.top-right{
+    position:absolute;
+    top:25px;
+    right:30px;
+    font-size:12px;
+    color:rgba(255,255,255,0.7);
+    font-weight:500;
+}
+
+/* FOOTER */
+.footer{
+    margin-top:25px;
+    display:flex;
+    gap:28px;
+    font-size:13px;
+    color:#64748b;
+    font-weight:500;
+}
+
+.footer span{
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.footer span:hover{
+    color:#1e40af;
+}
+
+/* INFO TEXT */
+.info{
+    margin-top:8px;
+    font-size:12px;
+    color:#94a3b8;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- LEFT -->
+    <div class="left">
+
+        <div class="top-left">Secure Platform • v1.0</div>
+
+        <h2>Connexion</h2>
+        <p>Accédez à votre espace professionnel sécurisé</p>
+
+        <form method="post" autocomplete="off">
+            <input name="username" placeholder="Nom d'utilisateur ou email" required>
+            <input name="password" type="password" placeholder="Mot de passe" required>
+            <button>Se connecter</button>
+
+            <!-- ✅ FIXED ROUTE -->
+            <a href="/forgot" style="display:block;margin-top:15px;color:#1e40af;font-size:14px;text-decoration:none;font-weight:500;">
+               Mot de passe oublié ?
+            </a>
+        </form>
+
+    </div>
+
+    <!-- RIGHT -->
+    <div class="right">
+
+        <div class="top-right">Enterprise System</div>
+
+        <h3>Système professionnel</h3>
+
+        <p>
+            Une plateforme sécurisée conçue selon les standards des grandes entreprises,
+            offrant performance, fiabilité et expérience utilisateur moderne.
+        </p>
+
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    <span>Utilisation</span>
+    <span>Confidentialité</span>
+    <span>Support</span>
+    <span>Contact</span>
+</div>
+
+<div class="info">
+    © 2026 - Plateforme sécurisée professionnelle
+</div>
+
+</body>
+</html>
