@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Inscription</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    font-family:'Inter',sans-serif;
+    background:#ffffff;
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+/* CARD */
+.container{
+    display:flex;
+    width:1120px;
+    height:650px;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 25px 60px rgba(0,0,0,0.10);
+    border:2px solid #e5e7eb;
+}
+
+/* LEFT */
+.left{
+    flex:1;
+    background:#ffffff;
+    padding:90px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+h2{
+    font-size:42px;
+    margin:0;
+    color:#0f172a;
+    font-weight:700;
+}
+
+p{
+    margin-top:10px;
+    margin-bottom:35px;
+    color:#64748b;
+}
+
+/* INPUTS */
+input{
+    width:100%;
+    padding:18px;
+    margin-top:14px;
+    border-radius:12px;
+    border:2px solid #e5e7eb;
+    font-size:16px;
+}
+
+/* BUTTON */
+button{
+    width:100%;
+    padding:18px;
+    margin-top:22px;
+    border:none;
+    border-radius:12px;
+    font-size:16px;
+    font-weight:700;
+    color:white;
+    cursor:pointer;
+    background:linear-gradient(135deg,#1e40af,#2563eb,#3b82f6);
+}
+
+/* RIGHT */
+.right{
+    flex:1;
+    background:linear-gradient(135deg,#0f172a,#1e3a8a,#2563eb);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:90px;
+    color:white;
+}
+
+.right h3{
+    font-size:34px;
+}
+
+.right p{
+    color:rgba(255,255,255,0.85);
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- LEFT -->
+<div class="left">
+
+<h2>Inscription</h2>
+<p>Créez votre compte</p>
+
+<form method="post" enctype="multipart/form-data">
+
+    <input name="first_name" placeholder="Prénom" required>
+    <input name="last_name" placeholder="Nom" required>
+
+    <input name="username" placeholder="Nom d'utilisateur" required>
+    <input name="password" type="password" placeholder="Mot de passe" required>
+
+    <input type="file" name="logo" required>
+
+    <button>Créer le compte</button>
+
+</form>
+
+</div>
+
+<!-- RIGHT -->
+<div class="right">
+    <h3>Bienvenue</h3>
+    <p>Créez votre espace sécurisé et commencez à utiliser la plateforme.</p>
+</div>
+
+</div>
+
+</body>
+</html>

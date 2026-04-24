@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, session
 from flask_mail import Mail, Message
 from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
 from dotenv import load_dotenv
 from functools import wraps
 import sqlite3, os, random
@@ -9,6 +10,9 @@ load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY")
+
+UPLOAD_FOLDER = "static/uploads"
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 # =========================
 # LOGIN DECORATOR
@@ -46,6 +50,9 @@ def init_db():
         username TEXT UNIQUE,
         password TEXT,
         email TEXT,
+        first_name TEXT,
+        last_name TEXT,
+        logo TEXT,
         first_login INTEGER DEFAULT 1
     )
     """)
@@ -55,25 +62,28 @@ def init_db():
 
 init_db()
 
+
 # =========================
-# DEFAULT USER (FIXED ✅)
+# DEFAULT USER
 # =========================
 def create_default_user():
     conn = sqlite3.connect("database.db")
     c = conn.cursor()
 
-    # 🔥 لا تحذف المستخدم
     c.execute("SELECT * FROM users WHERE username='admin'")
     user = c.fetchone()
 
     if not user:
         c.execute("""
-        INSERT INTO users (username, password, email, first_login)
-        VALUES (?, ?, ?, ?)
+        INSERT INTO users (username, password, email, first_name, last_name, logo, first_login)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
         """, (
             "admin",
             generate_password_hash("1234"),
             "admin@test.com",
+            "Admin",
+            "System",
+            "",
             1
         ))
 
@@ -81,6 +91,55 @@ def create_default_user():
     conn.close()
 
 create_default_user()
+
+
+# =========================
+# REGISTER
+# =========================
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method == "POST":
+
+        first_name = request.form["first_name"]
+        last_name = request.form["last_name"]
+        username = request.form["username"]
+        password = generate_password_hash(request.form["password"])
+
+        email = request.form.get("email")
+
+        logo_file = request.files["logo"]
+        filename = secure_filename(logo_file.filename)
+        logo_path = os.path.join(UPLOAD_FOLDER, filename)
+        logo_file.save(logo_path)
+
+        conn = sqlite3.connect("database.db")
+        c = conn.cursor()
+
+        try:
+            c.execute("""
+            INSERT INTO users (username, password, email, first_name, last_name, logo, first_login)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+            """, (
+                username,
+                password,
+                email,
+                first_name,
+                last_name,
+                logo_path,
+                1
+            ))
+
+            conn.commit()
+            conn.close()
+
+            return redirect("/")
+
+        except:
+            conn.close()
+            return "❌ username already exists"
+
+    return render_template("register.html")
+
 
 # =========================
 # LOGIN
@@ -103,7 +162,7 @@ def login():
             session.clear()
             session["user_id"] = user[0]
 
-            if user[4] == 1:
+            if user[-1] == 1:
                 return redirect("/change")
 
             return redirect("/dashboard")
@@ -121,7 +180,7 @@ def login():
 def change():
     if request.method == "POST":
 
-        email = request.form["email"]
+        email = request.form.get("email")
         old_pass = request.form["old_pass"]
         new_pass = request.form["new_pass"]
 
@@ -137,12 +196,7 @@ def change():
         if not check_password_hash(data[0], old_pass):
             return "❌ wrong password"
 
-        session.pop("code", None)
-        session.pop("action", None)
-
-        code = str(random.randint(100000, 999999))
-
-        session["code"] = code
+        session["code"] = str(random.randint(100000, 999999))
         session["email"] = email
         session["new_pass"] = generate_password_hash(new_pass)
         session["action"] = "email_change"
@@ -150,9 +204,9 @@ def change():
         msg = Message(
             subject="Verification Code",
             sender=app.config['MAIL_USERNAME'],
-            recipients=[email]
+            recipients=[email] if email else []
         )
-        msg.body = f"Code: {code}"
+        msg.body = f"Code: {session['code']}"
         mail.send(msg)
 
         return redirect("/verify")
@@ -161,7 +215,7 @@ def change():
 
 
 # =========================
-# VERIFY EMAIL CHANGE
+# VERIFY
 # =========================
 @app.route("/verify", methods=["GET", "POST"])
 @login_required
@@ -200,12 +254,12 @@ def verify():
 
 
 # =========================
-# FORGOT PASSWORD
+# 🔥 FORGOT PASSWORD (ADDED)
 # =========================
 @app.route("/forgot", methods=["GET", "POST"])
 def forgot():
     if request.method == "POST":
-        email = request.form["email"]
+        email = request.form.get("email")
 
         conn = sqlite3.connect("database.db")
         c = conn.cursor()
@@ -216,9 +270,7 @@ def forgot():
         if not user:
             return "❌ email not found"
 
-        code = str(random.randint(100000, 999999))
-
-        session["reset_code"] = code
+        session["reset_code"] = str(random.randint(100000, 999999))
         session["reset_email"] = email
 
         msg = Message(
@@ -226,7 +278,7 @@ def forgot():
             sender=app.config['MAIL_USERNAME'],
             recipients=[email]
         )
-        msg.body = f"Your reset code is: {code}"
+        msg.body = f"Your reset code is: {session['reset_code']}"
         mail.send(msg)
 
         return redirect("/reset")
@@ -258,8 +310,7 @@ def reset():
         conn.commit()
         conn.close()
 
-        session.pop("reset_code", None)
-        session.pop("reset_email", None)
+        session.clear()
 
         return redirect("/")
 
@@ -272,7 +323,19 @@ def reset():
 @app.route("/dashboard")
 @login_required
 def dashboard():
-    return render_template("dashboard.html")
+    conn = sqlite3.connect("database.db")
+    c = conn.cursor()
+
+    c.execute("""
+    SELECT username, email, first_name, last_name, logo 
+    FROM users 
+    WHERE id=?
+    """, (session["user_id"],))
+
+    user = c.fetchone()
+    conn.close()
+
+    return render_template("dashboard.html", user=user)
 
 
 # =========================
@@ -282,83 +345,6 @@ def dashboard():
 def logout():
     session.clear()
     return redirect("/")
-
-
-# =========================
-# CHANGE PASSWORD
-# =========================
-@app.route("/change-password", methods=["GET", "POST"])
-@login_required
-def change_password():
-    if request.method == "POST":
-        old_pass = request.form["old_pass"]
-        new_pass = request.form["new_pass"]
-
-        conn = sqlite3.connect("database.db")
-        c = conn.cursor()
-        c.execute("SELECT password, email FROM users WHERE id=?", (session["user_id"],))
-        data = c.fetchone()
-        conn.close()
-
-        if not data:
-            return "❌ user not found"
-
-        if not check_password_hash(data[0], old_pass):
-            return "❌ wrong password"
-
-        session.pop("code", None)
-        session.pop("action", None)
-
-        code = str(random.randint(100000, 999999))
-
-        session["code"] = code
-        session["new_pass"] = generate_password_hash(new_pass)
-        session["action"] = "password_change"
-
-        msg = Message(
-            subject="Password Change Code",
-            sender=app.config['MAIL_USERNAME'],
-            recipients=[data[1]]
-        )
-        msg.body = f"Your code is: {code}"
-        mail.send(msg)
-
-        return redirect("/verify-password")
-
-    return render_template("change_password.html")
-
-
-@app.route("/verify-password", methods=["GET", "POST"])
-@login_required
-def verify_password():
-    if session.get("action") != "password_change":
-        return redirect("/dashboard")
-
-    if request.method == "POST":
-        code = request.form["code"]
-
-        if code == session.get("code"):
-
-            conn = sqlite3.connect("database.db")
-            c = conn.cursor()
-
-            c.execute("""
-            UPDATE users SET password=? WHERE id=?
-            """, (
-                session["new_pass"],
-                session["user_id"]
-            ))
-
-            conn.commit()
-            conn.close()
-
-            session.clear()
-
-            return redirect("/")
-
-        return "❌ wrong code"
-
-    return render_template("verify_password.html")
 
 
 # =========================

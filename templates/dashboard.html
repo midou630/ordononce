@@ -85,7 +85,7 @@ p{
     gap:20px;
 }
 
-/* CARD (same style feel as login) */
+/* CARD */
 .card{
     flex:1;
     border:2px solid #e5e7eb;
@@ -111,6 +111,27 @@ p{
     color:#64748b;
     font-size:14px;
 }
+
+/* 🔥 NEW: USER BOX */
+.user-box{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.user-box img{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid #e5e7eb;
+}
+
+.user-name{
+    font-weight:600;
+    color:#0f172a;
+}
 </style>
 </head>
 
@@ -130,6 +151,14 @@ p{
 
 <!-- CONTENT -->
 <div class="container">
+
+    <!-- 🔥 NEW USER INFO -->
+    <div class="user-box">
+        <img src="/{{ user[4] }}" alt="logo">
+        <div class="user-name">
+            {{ user[2] }} {{ user[3] }}
+        </div>
+    </div>
 
     <h1>Bienvenue 👋</h1>
     <p>Votre espace professionnel sécurisé</p>
