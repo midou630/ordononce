@@ -1,0 +1,60 @@
+#prescriptionTemplate {
+    width: 794px;
+    height: 1123px;
+    position: relative;
+    background: white;
+}
+
+.template-bg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+}
+
+.overlay {
+    position: absolute;
+    color: black;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* أماكن النصوص */
+
+.doctor-name {
+    top: 120px;
+    right: 120px;
+}
+
+.patient-name {
+    top: 220px;
+    right: 120px;
+}
+
+.patient-age {
+    top: 220px;
+    right: 500px;
+}
+
+.diagnosis {
+    top: 320px;
+    right: 120px;
+    width: 500px;
+}
+
+.medications {
+    top: 450px;
+    right: 120px;
+    width: 500px;
+}
+
+.instructions {
+    top: 650px;
+    right: 120px;
+    width: 500px;
+}
+
+.date {
+    top: 1000px;
+    right: 120px;
+}

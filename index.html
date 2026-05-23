@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Medical Prescription Generator</title>
+
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/form.css" />
+    <link rel="stylesheet" href="styles/print.css" />
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="form-section">
+
+            <h1>إنشاء وصفة طبية</h1>
+
+            <form id="prescriptionForm">
+
+                <input type="text" id="doctorName" placeholder="اسم الطبيب" required />
+
+                <input type="text" id="patientName" placeholder="اسم المريض" required />
+
+                <input type="number" id="patientAge" placeholder="العمر" required />
+
+                <textarea id="diagnosis" placeholder="التشخيص"></textarea>
+
+                <textarea id="medications" placeholder="الأدوية"></textarea>
+
+                <textarea id="instructions" placeholder="التعليمات"></textarea>
+
+                <input type="date" id="date" required />
+
+                <button type="button" id="generateBtn">
+                    إنشاء PDF
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- وصفة المعاينة -->
+        <div class="preview-section">
+
+            <div id="prescriptionTemplate">
+
+                <img src="assets/templates/prescription-template.png"
+                    class="template-bg"
+                    alt="Prescription Template" />
+
+                <div class="overlay doctor-name" id="previewDoctorName"></div>
+
+                <div class="overlay patient-name" id="previewPatientName"></div>
+
+                <div class="overlay patient-age" id="previewPatientAge"></div>
+
+                <div class="overlay diagnosis" id="previewDiagnosis"></div>
+
+                <div class="overlay medications" id="previewMedications"></div>
+
+                <div class="overlay instructions" id="previewInstructions"></div>
+
+                <div class="overlay date" id="previewDate"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="libraries/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script src="scripts/formHandler.js"></script>
+    <script src="scripts/templateRenderer.js"></script>
+    <script src="scripts/pdfGenerator.js"></script>
+    <script src="scripts/app.js"></script>
+
+</body>
+
+</html>
