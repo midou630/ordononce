@@ -346,6 +346,9 @@ def logout():
     session.clear()
     return redirect("/")
 
+@app.route('/Prescription')
+def profile():
+    return render_template('account/Prescription.html')
 
 # =========================
 # RUN

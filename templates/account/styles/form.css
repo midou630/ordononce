@@ -1,0 +1,267 @@
+/* ======================================
+   FORM
+====================================== */
+
+form{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+
+
+/* ======================================
+   TEXTAREA
+====================================== */
+
+textarea{
+
+    min-height:110px;
+
+    resize:vertical;
+
+    line-height:1.6;
+}
+
+
+/* ======================================
+   MEDICATIONS BOX
+====================================== */
+
+.medications-box{
+    position:relative;
+}
+
+
+/* ======================================
+   MEDICATIONS DROPDOWN
+====================================== */
+
+.medications-list{
+
+    position:absolute;
+
+    top:105%;
+    left:0;
+    right:0;
+
+    background:white;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:14px;
+
+    max-height:260px;
+
+    overflow-y:auto;
+
+    z-index:9999;
+
+    box-shadow:
+        0 20px 40px rgba(0,0,0,0.08);
+
+    animation:fadeIn 0.18s ease;
+}
+
+
+.med-item{
+
+    padding:14px;
+
+    cursor:pointer;
+
+    transition:0.2s;
+
+    border-bottom:1px solid #f1f5f9;
+
+    font-size:13px;
+
+    color:#334155;
+}
+
+
+.med-item:last-child{
+    border-bottom:none;
+}
+
+
+.med-item:hover{
+
+    background:#eff6ff;
+
+    color:#1d4ed8;
+}
+
+
+/* ======================================
+   SELECTED MEDICATIONS
+====================================== */
+
+#selectedMeds{
+
+    display:flex;
+    flex-direction:column;
+
+    gap:10px;
+
+    margin-top:15px;
+}
+
+
+.selected-med{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    background:#f8fafc;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:12px;
+
+    padding:12px;
+
+    animation:fadeIn 0.2s ease;
+}
+
+
+.selected-med span{
+
+    font-size:13px;
+
+    color:#334155;
+
+    line-height:1.5;
+}
+
+
+/* ======================================
+   REMOVE BUTTON
+====================================== */
+
+.remove-med{
+
+    background:#ef4444;
+
+    color:white;
+
+    border:none;
+
+    border-radius:8px;
+
+    padding:6px 10px;
+
+    cursor:pointer;
+
+    font-size:12px;
+
+    transition:0.2s;
+}
+
+
+.remove-med:hover{
+
+    background:#dc2626;
+
+    transform:scale(1.05);
+}
+
+
+/* ======================================
+   POPUP STYLE
+====================================== */
+
+.popup-overlay{
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    background:rgba(15,23,42,0.45);
+
+    backdrop-filter:blur(3px);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:99999;
+}
+
+
+.popup-box{
+
+    width:340px;
+
+    background:white;
+
+    padding:24px;
+
+    border-radius:18px;
+
+    border:1px solid #e5e7eb;
+
+    box-shadow:
+        0 25px 60px rgba(0,0,0,0.12);
+
+    animation:popupIn 0.2s ease;
+}
+
+
+.popup-box h3{
+
+    margin-top:0;
+
+    margin-bottom:18px;
+
+    color:#0f172a;
+
+    font-size:20px;
+}
+
+
+.popup-box input,
+.popup-box select{
+
+    margin-bottom:12px;
+}
+
+
+/* ======================================
+   ANIMATIONS
+====================================== */
+
+@keyframes fadeIn{
+
+    from{
+        opacity:0;
+        transform:translateY(5px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+
+@keyframes popupIn{
+
+    from{
+        opacity:0;
+        transform:scale(0.95);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}

@@ -132,6 +132,11 @@ p{
     font-weight:600;
     color:#0f172a;
 }
+.card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
 </style>
 </head>
 
@@ -165,24 +170,65 @@ p{
 
     <div class="grid">
 
-        <div class="card">
-            <h3>Compte</h3>
-            <p>Gérez vos informations personnelles</p>
-        </div>
+
+    <div class="card">
+        <h3>Compte</h3>
+        <p>Gérez vos informations personnelles</p>
+    </div>
 
         <div class="card">
             <h3>Sécurité</h3>
             <p>Paramètres de sécurité et accès</p>
+            <button onclick="goToPage()">
+انشاء صفحة 
+</button>
         </div>
 
-        <div class="card">
-            <h3>Activité</h3>
-            <p>Historique et utilisation</p>
-        </div>
+<div class="card">
+    <h3>Activité</h3>
+    <p>Historique et utilisation</p>
+
+    <button onclick="openPopup()">انشاء وصفة</button>
+</div>
+
+<!-- popup -->
+<div id="popup" style="
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+">
+    <div style="
+        background:white;
+        width:90%;
+        height:90%;
+        margin:20px auto;
+        padding:10px;
+        position:relative;
+    ">
+        <button onclick="closePopup()" style="position:absolute; top:10px; right:10px;">
+            ✖
+        </button>
+
+        <iframe src="/Prescription" style="width:100%; height:100%; border:none;"></iframe>
+    </div>
+</div>
 
     </div>
 
 </div>
 
+<script>
+function openPopup(){
+    document.getElementById("popup").style.display = "block";
+}
+
+function closePopup(){
+    document.getElementById("popup").style.display = "none";
+}
+</script>
 </body>
 </html>

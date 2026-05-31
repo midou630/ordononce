@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>
+        Prescription Médicale
+    </title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/form.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/print.css') }}" />
+
+    <!-- FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- FORM SECTION -->
+        <div class="form-section">
+
+            <h1>Prescription Médicale</h1>
+
+            <div class="subtitle">
+                Générateur professionnel de prescriptions
+            </div>
+
+            <form id="prescriptionForm">
+
+                <input type="text" id="doctorName" placeholder="Nom du médecin" required />
+
+                <input type="text" id="patientName" placeholder="Nom et prénom du patient" required />
+
+                <input type="number" id="patientAge" placeholder="Âge" required />
+
+                <select id="patientGender" required>
+                    <option value="">Sexe</option>
+                    <option value="Homme">Homme</option>
+                    <option value="Femme">Femme</option>
+                </select>
+
+                <div class="medications-box">
+
+                    <input type="text" id="medications" placeholder="Rechercher un médicament..." />
+
+                    <div id="medicationsList" class="medications-list"></div>
+
+                    <div id="selectedMeds" class="selected-meds"></div>
+
+                </div>
+
+                <button type="button" id="generateBtn">
+                    Générer PDF
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- PREVIEW SECTION -->
+        <div class="preview-section">
+
+            <div id="prescriptionTemplate">
+
+                <img
+                    src="{{ url_for('static', filename='assets/templates/prescription-template.png') }}"
+                    class="template-bg"
+                    alt="Prescription Template" />
+
+                <div class="overlay doctor-name" id="previewDoctorName"></div>
+                <div class="overlay patient-name" id="previewPatientName"></div>
+                <div class="overlay patient-age" id="previewPatientAge"></div>
+                <div class="overlay patient-gender" id="previewPatientGender"></div>
+                <div class="overlay medications" id="previewMedications"></div>
+                <div class="overlay date" id="previewDate"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- LIBRARIES -->
+    <script src="{{ url_for('static', filename='libraries/html2canvas.min.js') }}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <!-- SCRIPTS -->
+    <script src="{{ url_for('static', filename='scripts/formHandler.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='scripts/templateRenderer.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='scripts/pdfGenerator.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='scripts/app.js') }}"></script>
+
+</body>
+
+</html>
