@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact | RA9MANA Clinic</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f1f5f9;
+    color:#0f172a;
+}
+
+/* ================= NAVBAR (نفس الذي أعطيتني + تحسين خفيف فقط) ================= */
+
+.navbar{
+    height:85px;
+    background:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 60px;
+    box-shadow:0 2px 20px rgba(0,0,0,.05);
+    position:sticky;
+    top:0;
+    z-index:999;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:800;
+    color:#2563eb;
+}
+
+.nav-links{
+    display:flex;
+    gap:25px;
+    align-items:center;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#334155;
+    font-weight:500;
+}
+
+.btn{
+    text-decoration:none;
+    padding:12px 22px;
+    border-radius:12px;
+    font-weight:600;
+}
+
+.btn-primary{
+    background:#2563eb;
+    color:white;
+}
+
+.btn-outline{
+    border:1px solid #2563eb;
+    color:#2563eb;
+}
+
+/* HAMBURGER */
+.navbar-toggler{
+    display:none;
+    background:none;
+    border:none;
+    cursor:pointer;
+}
+
+.hamburger{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+}
+
+.hamburger span{
+    width:28px;
+    height:3px;
+    background:#0f172a;
+    border-radius:5px;
+}
+
+/* ================= PAGE ================= */
+
+.wrapper{
+    max-width:1200px;
+    margin:auto;
+    padding:60px 20px;
+}
+
+.header{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.header h1{
+    font-size:42px;
+}
+
+.header p{
+    color:#64748b;
+    margin-top:10px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:1.2fr 1fr;
+    gap:30px;
+}
+
+/* FORM */
+.form-box{
+    background:white;
+    padding:30px;
+    border-radius:18px;
+    box-shadow:0 10px 40px rgba(0,0,0,.06);
+}
+
+.form-box h2{
+    color:#2563eb;
+    margin-bottom:20px;
+}
+
+input, textarea{
+    width:100%;
+    padding:14px;
+    margin-bottom:14px;
+    border:1px solid #e2e8f0;
+    border-radius:12px;
+    outline:none;
+}
+
+textarea{height:140px; resize:none;}
+
+button{
+    width:100%;
+    padding:14px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    border-radius:12px;
+    font-weight:600;
+}
+
+/* SIDE */
+.card{
+    background:white;
+    padding:25px;
+    border-radius:18px;
+    box-shadow:0 10px 40px rgba(0,0,0,.06);
+}
+
+.card h3{
+    color:#2563eb;
+    margin-bottom:10px;
+}
+
+.actions{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-top:15px;
+}
+
+.whatsapp{
+    background:#22c55e;
+    color:white;
+    text-align:center;
+    padding:12px;
+    border-radius:12px;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.call{
+    background:#0f172a;
+    color:white;
+    text-align:center;
+    padding:12px;
+    border-radius:12px;
+    text-decoration:none;
+    font-weight:600;
+}
+
+/* FOOTER (نفس الذي أعطيتني) */
+.footer{
+    background:#0f172a;
+    color:white;
+    text-align:center;
+    padding:35px;
+    margin-top:60px;
+}
+
+.footer p{
+    color:#cbd5e1;
+    margin-top:10px;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+
+    .nav-links{
+        display:none;
+        position:absolute;
+        top:85px;
+        left:0;
+        width:100%;
+        background:white;
+        flex-direction:column;
+        padding:20px;
+        box-shadow:0 10px 30px rgba(0,0,0,.08);
+    }
+
+    .nav-links.active{
+        display:flex;
+    }
+
+    .navbar-toggler{
+        display:block;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR (نفسك تماماً) -->
+<nav class="navbar">
+
+    <div class="logo">
+        RA9MANA Clinic
+    </div>
+
+    <button class="navbar-toggler" onclick="toggleMenu()">
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </button>
+
+    <div class="nav-links" id="mobileMenu">
+
+        <a href="#services">Services</a>
+        <a href="#advantages">Avantages</a>
+        <a href="#contact">Contact</a>
+          <a href="/login">home</a>
+
+        <a href="/login" class="btn btn-outline">Se connecter</a>
+      
+
+    </div>
+
+</nav>
+
+<!-- CONTENT -->
+<div class="wrapper">
+
+    <div class="header">
+        <h1>Contact & Support</h1>
+        <p>Plateforme professionnelle de communication directe</p>
+    </div>
+
+    <div class="grid">
+
+    <!-- 1. ADMIN CONTACT (أصبحت الأولى) -->
+    <div>
+
+        <div class="card">
+            <h3>👨‍💻 Contact Admin</h3>
+            <p>Contact direct rapide avec support technique et administratif.</p>
+
+            <div class="actions">
+                <a class="whatsapp" href="https://wa.me/213XXXXXXXXX">
+                    💬 WhatsApp
+                </a>
+
+                <a class="call" href="tel:+213XXXXXXXXX">
+                    📞 Appeler
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 2. SOCIAL MEDIA BOX (جديدة بالكامل) -->
+    <div>
+
+       <div class="form-box">
+
+            <h2>📩 Message</h2>
+
+         <form action="https://formspree.io/f/xxx" method="POST" enctype="multipart/form-data">
+
+    <input type="text" name="name" placeholder="Nom complet" required>
+
+    <input type="email" name="email" placeholder="Email" required>
+
+    <textarea name="message" placeholder="Message..." required></textarea>
+
+    <input type="file" name="attachment">
+
+    <button type="submit">Envoyer</button>
+
+</form>
+
+
+        </div>
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+<!-- FOOTER (نفسك) -->
+<footer class="footer">
+
+    <h2>RA9MANA Clinic</h2>
+
+    <p>Technologie • Santé • Conformité</p>
+
+    <p>© 2026 Tous droits réservés</p>
+
+</footer>
+
+<script>
+function toggleMenu(){
+    document.getElementById("mobileMenu").classList.toggle("active");
+}
+</script>
+
+</body>
+</html>

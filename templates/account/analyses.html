@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8" />
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0" />
+
+    <title>
+        Demande d'Analyses
+    </title>
+
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/form.css" />
+    <link rel="stylesheet" href="styles/print2.css" />
+
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- ===================================== -->
+        <!-- FORM SECTION -->
+        <!-- ===================================== -->
+        <div class="form-section">
+
+            <h1>
+                Demande d'Analyses
+            </h1>
+
+            <div class="subtitle">
+                Générateur professionnel de demandes d'analyses
+            </div>
+
+            <form id="prescriptionForm">
+
+              <input
+                  type="text"
+                  id="doctorName"
+                  placeholder="Nom du médecin"
+                  required />
+
+                <input
+                    type="text"
+                    id="patientName"
+                    placeholder="Nom et prénom du patient"
+                    required />
+
+                <input
+                    type="number"
+                    id="patientAge"
+                    placeholder="Âge"
+                    required />
+
+                <select
+                    id="patientGender"
+                    required>
+
+
+
+                    <option value="Homme">
+                        Homme
+                    </option>
+
+                    <option value="Femme">
+                        Femme
+                    </option>
+
+                </select>
+
+                <!-- ===================================== -->
+                <!-- ANALYSES -->
+                <!-- ===================================== -->
+                <div class="medications-box">
+
+                    <input
+                        type="text"
+                        id="analyses"
+                        placeholder="Rechercher une analyse..." />
+
+                    <div
+                        id="analysesList"
+                        class="medications-list">
+                    </div>
+
+                    <div
+                        id="selectedAnalyses"
+                        class="selected-meds">
+                    </div>
+
+                </div>
+
+              <button type="button" id="generateBtn">
+          Générer PDF
+      </button>
+
+            </form>
+
+        </div>
+
+        <!-- ===================================== -->
+        <!-- PREVIEW SECTION -->
+        <!-- ===================================== -->
+        <div class="preview-section">
+
+            <div id="prescriptionTemplate">
+
+                <img
+                    src="assets/templates/analyse-template.png"
+                    class="template-bg"
+                    alt="Analyse Template" />
+
+                <div
+                    class="overlay doctor-name"
+                    id="previewDoctorName">
+                </div>
+
+                <div
+                    class="overlay patient-name"
+                    id="previewPatientName">
+                </div>
+
+                <div
+                    class="overlay patient-age"
+                    id="previewPatientAge">
+                </div>
+
+                <div
+                    class="overlay patient-gender"
+                    id="previewPatientGender">
+                </div>
+
+                <div
+                    class="overlay medications"
+                    id="previewAnalyses">
+                </div>
+
+                <div
+                    class="overlay date"
+                    id="previewDate">
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="libraries/html2canvas.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script src="scripts/formHandler.js"></script>
+
+    <script src="scripts/templateRenderer2.js"></script>
+
+    <script src="scripts/pdfGenerator.js"></script>
+
+    <script src="scripts/app2.js"></script>
+
+</body>
+</html>

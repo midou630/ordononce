@@ -7,136 +7,594 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-body{
+
+
+
+*{
     margin:0;
+    padding:0;
+    box-sizing:border-box;
     font-family:'Inter',sans-serif;
-    background:#ffffff;
 }
 
-/* TOP BAR */
+body{
+    min-height:100vh;
+    background:
+    radial-gradient(circle at top left,#2563eb 0%,transparent 35%),
+    radial-gradient(circle at bottom right,#1e3a8a 0%,transparent 40%),
+    #020617;
+    color:white;
+}
+
+/* =========================
+   TOP BAR
+========================= */
+
 .nav{
-    height:70px;
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    height:80px;
     display:flex;
     justify-content:space-between;
     align-items:center;
     padding:0 40px;
-    border-bottom:1px solid #e5e7eb;
+    backdrop-filter:blur(20px);
+    background:rgba(255,255,255,.05);
+    border-bottom:1px solid rgba(255,255,255,.08);
+    z-index:999;
 }
 
 .logo{
-    font-weight:700;
-    color:#1e40af;
-    font-size:18px;
+    font-size:24px;
+    font-weight:800;
+    letter-spacing:2px;
+    color:white;
 }
 
 .nav-links{
     display:flex;
-    gap:20px;
-    align-items:center;
+    gap:15px;
 }
 
 .nav-links a{
     text-decoration:none;
-    color:#64748b;
-    font-weight:500;
-    font-size:14px;
-    transition:0.2s;
+    color:#cbd5e1;
+    padding:10px 16px;
+    border-radius:12px;
+    transition:.3s;
 }
 
 .nav-links a:hover{
-    color:#1e40af;
-}
-
-/* BUTTON STYLE */
-.logout{
-    background:linear-gradient(135deg,#1e40af,#2563eb,#3b82f6);
+    background:rgba(255,255,255,.08);
     color:white;
-    border:none;
-    padding:10px 16px;
-    border-radius:10px;
-    font-weight:600;
-    cursor:pointer;
-    transition:0.2s;
 }
 
-.logout:hover{
-    transform:translateY(-1px);
-}
+/* =========================
+   MAIN
+========================= */
 
-/* CONTENT */
 .container{
-    padding:50px;
+    padding:130px 50px 50px;
 }
+
+/* =========================
+   USER CARD
+========================= */
+
+.user-box{
+    display:flex;
+    align-items:center;
+    gap:20px;
+
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+
+    padding:25px;
+    border-radius:24px;
+
+    backdrop-filter:blur(20px);
+
+    margin-bottom:40px;
+}
+
+.user-box img{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    object-fit:cover;
+    border:3px solid #3b82f6;
+}
+
+.user-name{
+    font-size:26px;
+    font-weight:700;
+}
+
+.user-name::after{
+    content:"Médecin vérifié";
+    display:block;
+    font-size:14px;
+    margin-top:8px;
+    color:#60a5fa;
+}
+
+/* =========================
+   TITLES
+========================= */
 
 h1{
-    font-size:34px;
-    color:#0f172a;
+    font-size:52px;
     margin-bottom:10px;
+    font-weight:800;
+}
+
+p{
+    color:#94a3b8;
+}
+
+/* =========================
+   GRID
+========================= */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+    gap:30px;
+    margin-top:50px;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.card{
+    position:relative;
+
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:28px;
+
+    padding:35px;
+
+    backdrop-filter:blur(20px);
+
+    overflow:hidden;
+
+    transition:.4s;
+}
+
+.card::before{
+    content:"";
+    position:absolute;
+    width:250px;
+    height:250px;
+
+    background:#2563eb;
+
+    border-radius:50%;
+
+    top:-120px;
+    right:-120px;
+
+    opacity:.15;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    box-shadow:
+    0 25px 50px rgba(37,99,235,.25);
+}
+
+.card h3{
+    font-size:32px;
+    margin-bottom:15px;
+    font-weight:800;
+}
+
+.card p{
+    font-size:15px;
+    line-height:1.8;
+    min-height:90px;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.action-btn{
+    width:100%;
+    border:none;
+    border-radius:18px;
+    padding:18px;
+
+    font-size:15px;
+    font-weight:700;
+
+    cursor:pointer;
+
+    color:white;
+
+    background:
+    linear-gradient(
+    135deg,
+    #2563eb,
+    #3b82f6,
+    #60a5fa);
+
+    transition:.3s;
+}
+
+.action-btn:hover{
+    transform:scale(1.03);
+}
+
+/* =========================
+   POPUP
+========================= */
+
+.popup-overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.8);
+    backdrop-filter:blur(10px);
+    z-index:99999;
+}
+
+.popup-content{
+    width:95%;
+    height:95%;
+    background:white;
+    margin:20px auto;
+    border-radius:30px;
+    overflow:hidden;
+    position:relative;
+}
+
+.close-btn{
+    position:absolute;
+    top:15px;
+    right:15px;
+
+    width:50px;
+    height:50px;
+
+    border:none;
+    border-radius:50%;
+
+    background:#ef4444;
+    color:white;
+
+    font-size:20px;
+    cursor:pointer;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.info{
+    text-align:center;
+    margin-top:60px;
+    padding:25px;
+    color:#64748b;
+    border-top:1px solid rgba(255,255,255,.08);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+body{
+    margin:0;
+    font-family:'Inter',sans-serif;
+    background:#f8fafc;
+    color:#0f172a;
+}
+
+/* =========================
+   TOP BAR
+========================= */
+
+.nav{
+    height:75px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 40px;
+    background:white;
+    border-bottom:1px solid #e2e8f0;
+    box-shadow:0 2px 20px rgba(0,0,0,.05);
+    position:sticky;
+    top:0;
+    z-index:999;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:800;
+    color:#2563eb;
+    letter-spacing:1px;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#475569;
+    font-weight:500;
+    padding:10px 14px;
+    border-radius:10px;
+    transition:.25s;
+}
+
+.nav-links a:hover{
+    background:#eff6ff;
+    color:#2563eb;
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.container{
+    max-width:1300px;
+    margin:auto;
+    padding:40px;
+}
+
+/* =========================
+   USER BOX
+========================= */
+
+.user-box{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    background:white;
+    padding:22px;
+    border-radius:20px;
+    border:1px solid #e2e8f0;
+    box-shadow:0 10px 30px rgba(0,0,0,.05);
+}
+
+.user-box img{
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    object-fit:cover;
+    border:3px solid #2563eb;
+}
+
+.user-name{
+    font-size:22px;
+    font-weight:700;
+    color:#0f172a;
+}
+
+/* =========================
+   TITLES
+========================= */
+
+h1{
+    margin-top:35px;
+    margin-bottom:10px;
+    font-size:38px;
+    font-weight:800;
 }
 
 p{
     color:#64748b;
 }
 
-/* GRID */
-.grid{
-    margin-top:30px;
-    display:flex;
-    gap:20px;
+/* =========================
+   HERO BOX
+========================= */
+
+.hero-box{
+    margin-top:25px;
+    background:linear-gradient(135deg,#2563eb,#3b82f6);
+    color:white;
+    padding:30px;
+    border-radius:24px;
+    box-shadow:0 15px 40px rgba(37,99,235,.25);
 }
 
-/* CARD */
+.hero-box h2{
+    margin:0;
+    font-size:28px;
+    font-weight:800;
+}
+
+.hero-box p{
+    margin-top:10px;
+    color:#dbeafe;
+}
+
+/* =========================
+   GRID
+========================= */
+
+.grid{
+    margin-top:35px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:25px;
+}
+
+/* =========================
+   CARDS
+========================= */
+
 .card{
-    flex:1;
-    border:2px solid #e5e7eb;
-    border-radius:14px;
-    padding:25px;
-    box-shadow:0 20px 40px rgba(0,0,0,0.05);
-    transition:0.2s;
+    background:white;
+    border-radius:24px;
+    padding:30px;
+    border:1px solid #e2e8f0;
+    box-shadow:0 12px 35px rgba(0,0,0,.05);
+    transition:.3s;
 }
 
 .card:hover{
-    transform:translateY(-3px);
-    box-shadow:0 25px 50px rgba(0,0,0,0.08);
+    transform:translateY(-5px);
+    box-shadow:0 20px 45px rgba(0,0,0,.08);
 }
 
 .card h3{
     margin:0;
-    color:#1e40af;
-    font-weight:700;
+    font-size:26px;
+    font-weight:800;
+}
+
+.card:nth-child(1) h3{
+    color:#2563eb;
+}
+
+.card:nth-child(2) h3{
+    color:#16a34a;
+}
+
+.card:nth-child(3) h3{
+    color:#ea580c;
 }
 
 .card p{
-    margin-top:10px;
+    margin-top:15px;
+    margin-bottom:20px;
+    font-size:14px;
+    line-height:1.7;
+    min-height:70px;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.action-btn{
+    width:100%;
+    border:none;
+    border-radius:14px;
+    padding:15px;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
+    color:white;
+    background:linear-gradient(135deg,#2563eb,#3b82f6);
+    transition:.25s;
+}
+
+.action-btn:hover{
+    transform:translateY(-2px);
+}
+
+/* =========================
+   POPUP
+========================= */
+
+.popup-overlay{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(15,23,42,.7);
+    backdrop-filter:blur(5px);
+    z-index:9999;
+}
+
+.popup-content{
+    width:95%;
+    height:95%;
+    background:white;
+    margin:15px auto;
+    border-radius:24px;
+    overflow:hidden;
+    position:relative;
+}
+
+.close-btn{
+    position:absolute;
+    top:15px;
+    right:15px;
+    width:45px;
+    height:45px;
+    border:none;
+    border-radius:50%;
+    background:#ef4444;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+    z-index:99999;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.info{
+    text-align:center;
+    margin-top:50px;
+    padding:25px;
     color:#64748b;
     font-size:14px;
 }
 
-/* 🔥 NEW: USER BOX */
-.user-box{
-    display:flex;
-    align-items:center;
-    gap:15px;
-    margin-bottom:20px;
-}
+/* =========================
+   RESPONSIVE
+========================= */
 
-.user-box img{
-    width:55px;
-    height:55px;
-    border-radius:50%;
-    object-fit:cover;
-    border:2px solid #e5e7eb;
-}
+@media(max-width:768px){
 
-.user-name{
-    font-weight:600;
-    color:#0f172a;
-}
-.card-link {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-}
+    .nav{
+        padding:0 20px;
+    }
+
+    .container{
+        padding:20px;
+    }
+
+    h1{
+        font-size:30px;
+    }
+
+    .user-box{
+        flex-direction:column;
+        text-align:center;
+    }
+} 
 </style>
 </head>
 
@@ -145,11 +603,14 @@ p{
 <!-- NAV -->
 <div class="nav">
 
-    <div class="logo">SecureApp</div>
+    <div class="logo">CLINIC360 PRO</div>
 
     <div class="nav-links">
-        <a href="/change-password">Changer mot de passe</a>
+        <a href="/home1">  home</a>
+        <a href="/change">Changer mot de passe</a>
         <a href="/logout">Déconnexion</a>
+      <a href="/home">  Contacter l'assistance</a>
+    <a href="/logout">  Notifications</a>
     </div>
 
 </div>
@@ -170,58 +631,101 @@ p{
 
     <div class="grid">
 
-
+    <!-- CARD 1 -->
     <div class="card">
-        <h3>Compte</h3>
-        <p>Gérez vos informations personnelles</p>
+        <h3>MEDORA</h3>
+        <p>À propos de MEDORA 
+&#x1F4D6</p>
+
+       <button class="action-btn" onclick="openPage1()">
+           Créer une ordonnance
+        </button>
     </div>
 
-        <div class="card">
-            <h3>Sécurité</h3>
-            <p>Paramètres de sécurité et accès</p>
-            <button onclick="goToPage()">
-انشاء صفحة 
-</button>
-        </div>
+    <!-- CARD 2 -->
+    <div class="card">
+        <h3>LABIA</h3>
+        <p>À propos de LABIA 
+&#x1F4D6</p>
 
-<div class="card">
-    <h3>Activité</h3>
-    <p>Historique et utilisation</p>
+      <button class="action-btn" onclick="openPage2()">
+Créer une demande d’analyses
+        </button>
+    </div>
 
-    <button onclick="openPopup()">انشاء وصفة</button>
-</div>
+    <!-- CARD 3 -->
+    <div class="card">
+        <h3>IMEDIX</h3>
+        <p>À propos de IMEDIX 
+&#x1F4D6</p>
+
+      
+      <button class="action-btn" onclick="openPage3()">
+            Créer une demande d’imagerie médicale
+        </button>
+    </div>
 
 <!-- popup -->
-<div id="popup" style="
-    display:none;
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.6);
-">
-    <div style="
-        background:white;
-        width:90%;
-        height:90%;
-        margin:20px auto;
-        padding:10px;
-        position:relative;
-    ">
-        <button onclick="closePopup()" style="position:absolute; top:10px; right:10px;">
-            ✖
+<div id="popup" class="popup-overlay" onclick="outsideClose(event)">
+
+    <div class="popup-content">
+
+        <button class="close-btn" onclick="closePopup()">
+            ✕
         </button>
 
-        <iframe src="/Prescription" style="width:100%; height:100%; border:none;"></iframe>
+        <iframe
+            id="popupFrame"
+            src="/Prescription"
+            style="width:100%; height:100%; border:none;">
+        </iframe>
+
     </div>
+
 </div>
 
     </div>
 
+</div>
+<div class="info">
+   
+    © 2026 - Plateforme sécurisée professionnelle
 </div>
 
 <script>
+
+// 🔥 Pages dynamiques depuis Flask
+const page1 = "{{ user[5] }}";
+const page2 = "{{ user[6] }}";
+const page3 = "{{ user[7] }}";
+
+function openPage1(){
+    if(page1){
+        document.getElementById("popupFrame").src = page1;
+        openPopup();
+    } else {
+        alert("Page 1 غير مهيأة");
+    }
+}
+
+function openPage2(){
+    if(page2){
+        document.getElementById("popupFrame").src = page2;
+        openPopup();
+    } else {
+        alert("Page 2 غير مهيأة");
+    }
+}
+
+function openPage3(){
+    if(page3){
+        document.getElementById("popupFrame").src = page3;
+        openPopup();
+    } else {
+        alert("Page 3 غير مهيأة");
+    }
+}
+
 function openPopup(){
     document.getElementById("popup").style.display = "block";
 }
@@ -229,6 +733,16 @@ function openPopup(){
 function closePopup(){
     document.getElementById("popup").style.display = "none";
 }
+
+
+// 🔥 إغلاق الـ popup عند الضغط خارج النافذة
+function outsideClose(event){
+    if(event.target.id === "popup"){
+        closePopup();
+    }
+}
+
 </script>
+
 </body>
 </html>

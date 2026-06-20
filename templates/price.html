@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing | RA9MANA Clinic</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* ===== GLOBAL ===== */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f1f5f9;
+    color:#0f172a;
+}
+
+/* ===== NAVBAR (نفسك تماماً) ===== */
+.navbar{
+    height:85px;
+    background:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 60px;
+    box-shadow:0 2px 20px rgba(0,0,0,.05);
+    position:sticky;
+    top:0;
+    z-index:999;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:800;
+    color:#2563eb;
+}
+
+.nav-links{
+    display:flex;
+    gap:25px;
+    align-items:center;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#334155;
+    font-weight:500;
+}
+
+.btn{
+    text-decoration:none;
+    padding:12px 22px;
+    border-radius:12px;
+    font-weight:600;
+}
+
+.btn-primary{
+    background:#2563eb;
+    color:white;
+}
+
+.btn-outline{
+    border:1px solid #2563eb;
+    color:#2563eb;
+}
+
+/* ===== HEADER ===== */
+.header{
+    text-align:center;
+    padding:70px 20px 30px;
+}
+
+.header h1{
+    font-size:44px;
+}
+
+.header p{
+    color:#64748b;
+    margin-top:10px;
+}
+
+/* ===== PRICING ===== */
+.pricing{
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+    padding:40px 20px 80px;
+}
+
+.card{
+    background:white;
+    padding:35px;
+    border-radius:22px;
+    box-shadow:0 10px 40px rgba(0,0,0,.06);
+    text-align:center;
+    transition:.3s;
+    position:relative;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 60px rgba(0,0,0,.12);
+}
+
+.card h2{
+    color:#2563eb;
+    margin-bottom:10px;
+}
+
+.price{
+    font-size:40px;
+    font-weight:800;
+    margin:15px 0;
+}
+
+.card ul{
+    list-style:none;
+    margin:20px 0;
+}
+
+.card ul li{
+    margin:10px 0;
+    color:#475569;
+}
+
+/* FEATURED */
+.best{
+    border:2px solid #2563eb;
+    transform:scale(1.05);
+}
+
+.best::before{
+    content:"Most Popular";
+    position:absolute;
+    top:-12px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#2563eb;
+    color:white;
+    padding:5px 15px;
+    border-radius:20px;
+    font-size:12px;
+}
+
+/* BUTTON */
+.buy{
+    display:inline-block;
+    margin-top:15px;
+    padding:12px 20px;
+    border-radius:12px;
+    text-decoration:none;
+    font-weight:600;
+    background:#2563eb;
+    color:white;
+}
+
+/* ===== FOOTER ===== */
+.footer{
+    background:#0f172a;
+    color:white;
+    text-align:center;
+    padding:35px;
+}
+
+.footer p{
+    color:#cbd5e1;
+    margin-top:10px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+    .pricing{
+        grid-template-columns:1fr;
+    }
+
+    .best{
+        transform:none;
+    }
+
+    .navbar{
+        padding:0 25px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="logo">RA9MANA Clinic</div>
+
+    <div class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#contact">Contact</a>
+
+        <a class="btn btn-outline" href="/login">Se connecter</a>
+        <a class="btn btn-primary" href="/register">Demander un compte</a>
+    </div>
+</div>
+
+<!-- HEADER -->
+<div class="header">
+    <h1>Pricing Plans</h1>
+    <p>Choisissez le plan qui correspond à votre activité</p>
+</div>
+
+<!-- PRICING -->
+<div class="pricing">
+
+    <!-- MONTHLY -->
+    <div class="card">
+        <h2>Mensuel</h2>
+        <div class="price">1500 DA</div>
+        <ul>
+            <li>✔ Accès plateforme</li>
+            <li>✔ Support standard</li>
+            <li>✔ Mise à jour régulière</li>
+        </ul>
+        <a class="buy" href="#">S'abonner</a>
+    </div>
+
+    <!-- YEARLY -->
+    <div class="card best">
+        <h2>Annuel</h2>
+        <div class="price">12000 DA</div>
+        <ul>
+            <li>✔ Tout le plan mensuel</li>
+            <li>✔ -30% économie</li>
+            <li>✔ Support prioritaire</li>
+        </ul>
+        <a class="buy" href="#">Choisir</a>
+    </div>
+
+    <!-- LIFETIME -->
+    <div class="card">
+        <h2>À vie</h2>
+        <div class="price">35000 DA</div>
+        <ul>
+            <li>✔ Accès illimité</li>
+            <li>✔ Toutes fonctionnalités</li>
+            <li>✔ Support VIP</li>
+        </ul>
+        <a class="buy" href="#">Accès illimité</a>
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <h2>RA9MANA Clinic</h2>
+    <p>Technologie • Santé • Conformité</p>
+    <p>© 2026 Tous droits réservés</p>
+</footer>
+
+</body>
+</html>

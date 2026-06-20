@@ -168,6 +168,277 @@ button:hover{
     font-size:12px;
     color:#94a3b8;
 }
+
+
+
+
+
+/* =========================
+   GLOBAL
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:linear-gradient(135deg,#0f172a,#1e3a8a,#2563eb);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:30px;
+    overflow-x:hidden;
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container{
+    width:100%;
+    max-width:1100px;
+    min-height:650px;
+
+    display:flex;
+    overflow:hidden;
+
+    border-radius:28px;
+
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.15);
+
+    box-shadow:
+    0 25px 60px rgba(0,0,0,.25);
+}
+
+/* =========================
+   LEFT
+========================= */
+
+.left{
+    flex:1;
+    background:#fff;
+    padding:70px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.top-left{
+    color:#2563eb;
+    font-weight:600;
+    margin-bottom:20px;
+    font-size:14px;
+    letter-spacing:.5px;
+}
+
+.left h2{
+    font-size:42px;
+    color:#0f172a;
+    margin-bottom:10px;
+}
+
+.left p{
+    color:#64748b;
+    margin-bottom:35px;
+    line-height:1.6;
+}
+
+/* =========================
+   FORM
+========================= */
+
+form{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+input{
+    width:100%;
+    padding:16px 18px;
+
+    border:1px solid #dbeafe;
+    border-radius:14px;
+
+    background:#f8fafc;
+
+    font-size:15px;
+    transition:.25s;
+}
+
+input:focus{
+    outline:none;
+    border-color:#2563eb;
+    box-shadow:0 0 0 4px rgba(37,99,235,.12);
+}
+
+button{
+    border:none;
+    cursor:pointer;
+
+    padding:16px;
+
+    border-radius:14px;
+
+    background:linear-gradient(
+    135deg,
+    #2563eb,
+    #1d4ed8
+    );
+
+    color:white;
+    font-size:15px;
+    font-weight:600;
+
+    transition:.3s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+    box-shadow:
+    0 15px 25px rgba(37,99,235,.25);
+}
+
+/* =========================
+   RIGHT
+========================= */
+
+.right{
+    flex:1;
+
+    color:white;
+
+    padding:70px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+
+    position:relative;
+}
+
+.top-right{
+    position:absolute;
+    top:35px;
+    right:35px;
+
+    font-size:14px;
+    opacity:.8;
+}
+
+.right h3{
+    font-size:46px;
+    line-height:1.1;
+    margin-bottom:25px;
+}
+
+.right p{
+    font-size:18px;
+    line-height:1.8;
+    opacity:.95;
+    max-width:450px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+    position:fixed;
+    bottom:60px;
+    left:50%;
+    transform:translateX(-50%);
+
+    display:flex;
+    gap:25px;
+
+    color:white;
+    font-size:14px;
+    opacity:.85;
+}
+
+.footer span{
+    cursor:pointer;
+}
+
+.footer span:hover{
+    opacity:1;
+}
+
+.info{
+    position:fixed;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+
+    color:white;
+    opacity:.8;
+    font-size:13px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+
+    body{
+        padding:15px;
+        align-items:flex-start;
+    }
+
+    .container{
+        flex-direction:column;
+        min-height:auto;
+    }
+
+    .right{
+        order:-1;
+        padding:50px 30px;
+        text-align:center;
+    }
+
+    .right h3{
+        font-size:34px;
+    }
+
+    .right p{
+        max-width:none;
+    }
+
+    .left{
+        padding:40px 25px;
+    }
+
+    .left h2{
+        font-size:30px;
+    }
+
+    .top-right{
+        position:static;
+        margin-bottom:20px;
+    }
+
+    .footer{
+        display:none;
+    }
+
+    .info{
+        position:relative;
+        left:auto;
+        bottom:auto;
+        transform:none;
+        margin-top:20px;
+        text-align:center;
+    }
+}
 </style>
 </head>
 

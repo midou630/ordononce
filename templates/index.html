@@ -1,0 +1,855 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RA9MANA Clinic</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#f8fafc;
+    color:#0f172a;
+}
+
+/* NAVBAR */
+
+.navbar{
+    height:85px;
+    background:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 60px;
+    box-shadow:0 2px 20px rgba(0,0,0,.05);
+    position:sticky;
+    top:0;
+    z-index:999;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:800;
+    color:#2563eb;
+}
+
+.nav-links{
+    display:flex;
+    gap:25px;
+    align-items:center;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#334155;
+    font-weight:500;
+}
+
+.btn{
+    text-decoration:none;
+    padding:12px 22px;
+    border-radius:12px;
+    font-weight:600;
+}
+
+.btn-primary{
+    background:#2563eb;
+    color:white;
+}
+
+.btn-outline{
+    border:1px solid #2563eb;
+    color:#2563eb;
+}
+
+/* HERO */
+
+.hero{
+    padding:100px 60px;
+    background:
+    linear-gradient(
+    135deg,
+    #eff6ff,
+    #ffffff);
+}
+
+.hero-container{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    gap:60px;
+}
+
+.hero-text{
+    flex:1;
+}
+
+.hero-text h1{
+    font-size:62px;
+    line-height:1.1;
+    margin-bottom:20px;
+}
+
+.hero-text p{
+    color:#64748b;
+    font-size:18px;
+    line-height:1.8;
+    margin-bottom:30px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:15px;
+}
+
+.hero-card{
+    flex:1;
+    background:white;
+    padding:40px;
+    border-radius:25px;
+    box-shadow:0 20px 50px rgba(0,0,0,.08);
+}
+
+.hero-card h3{
+    color:#2563eb;
+    margin-bottom:15px;
+}
+
+/* STATS */
+
+.stats{
+    padding:70px 60px;
+}
+
+.stats-grid{
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+
+.stat-card{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+
+.stat-card h2{
+    color:#2563eb;
+    margin-top:15px;
+}
+
+/* SECTION */
+
+.section{
+    padding:80px 60px;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.section-title h2{
+    font-size:40px;
+}
+
+.grid{
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:white;
+    padding:30px;
+    border-radius:22px;
+    box-shadow:0 10px 30px rgba(0,0,0,.05);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-6px);
+}
+
+.card h3{
+    color:#2563eb;
+    margin-bottom:15px;
+}
+
+.card p{
+    color:#64748b;
+    line-height:1.7;
+}
+
+/* CONTACT */
+
+.contact{
+    background:white;
+    padding:80px 60px;
+}
+
+.contact-grid{
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+
+.contact-card{
+    padding:30px;
+    border-radius:20px;
+    background:#f8fafc;
+}
+
+/* FOOTER */
+
+.footer{
+    background:#0f172a;
+    color:white;
+    text-align:center;
+    padding:35px;
+}
+
+.footer p{
+    color:#cbd5e1;
+    margin-top:10px;
+}
+
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+@media (max-width: 992px){
+
+    .nav{
+        padding:15px 20px;
+        flex-direction:column;
+        gap:15px;
+        height:auto;
+        text-align:center;
+    }
+
+    .nav-links{
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:12px;
+    }
+
+    .container{
+        padding:25px;
+    }
+
+    .grid{
+        flex-direction:column;
+    }
+
+    .card{
+        width:100%;
+    }
+
+    h1{
+        font-size:32px;
+    }
+
+    .user-box{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .hero{
+        padding:60px 25px;
+    }
+
+    .hero h1{
+        font-size:42px;
+        line-height:1.2;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    .hero-buttons{
+        flex-direction:column;
+        align-items:center;
+    }
+
+    .hero-buttons a{
+        width:100%;
+        max-width:320px;
+        text-align:center;
+    }
+
+    .features{
+        grid-template-columns:1fr;
+    }
+
+    .contact-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media (max-width: 768px){
+
+    body{
+        overflow-x:hidden;
+    }
+
+    .logo{
+        font-size:20px;
+    }
+
+    h1{
+        font-size:28px;
+    }
+
+    .hero h1{
+        font-size:34px;
+    }
+
+    .hero p{
+        font-size:15px;
+    }
+
+    .card{
+        padding:22px;
+    }
+
+    .action-btn{
+        padding:13px;
+        font-size:14px;
+    }
+
+    .popup-content{
+        width:98%;
+        height:96%;
+        margin:10px auto;
+        border-radius:14px;
+    }
+
+    .info{
+        padding:15px;
+        text-align:center;
+        font-size:13px;
+    }
+}
+
+@media (max-width: 480px){
+
+    .container{
+        padding:18px;
+    }
+
+    .hero{
+        padding:45px 18px;
+    }
+
+    .hero h1{
+        font-size:28px;
+    }
+
+    .hero p{
+        font-size:14px;
+    }
+
+    .card h3{
+        font-size:18px;
+    }
+
+    .nav-links a{
+        font-size:13px;
+    }
+
+    .user-box img{
+        width:70px;
+        height:70px;
+    }
+
+    .close-btn{
+        width:38px;
+        height:38px;
+        font-size:16px;
+    }
+}
+
+
+@media (max-width:768px){
+
+    .mbr-section-title{
+        font-size:2rem !important;
+        line-height:1.2 !important;
+    }
+
+    .mbr-text{
+        font-size:1rem !important;
+    }
+
+    .btn{
+        width:100%;
+        margin-bottom:10px;
+    }
+
+    .navbar-brand img{
+        height:50px !important;
+    }
+
+    .image-wrapper{
+        margin-bottom:25px;
+    }
+
+    .display-1{
+        font-size:2.5rem !important;
+    }
+
+    .display-2{
+        font-size:1.6rem !important;
+    }
+
+    .display-4{
+        font-size:1.3rem !important;
+    }
+
+    .display-5{
+        font-size:1rem !important;
+    }
+
+    iframe{
+        width:100% !important;
+        height:250px !important;
+    }
+}
+
+
+
+
+
+/* MOBILE NAVBAR */
+@media (max-width: 768px){
+
+    .navbar{
+        padding:10px 15px !important;
+    }
+
+    .navbar-brand img{
+        height:50px !important;
+        width:auto;
+    }
+
+    .navbar-collapse{
+        background:#ffffff;
+        margin-top:10px;
+        padding:15px;
+        border-radius:15px;
+        box-shadow:0 10px 30px rgba(0,0,0,.08);
+    }
+
+    .navbar-nav{
+        text-align:center;
+    }
+
+    .navbar-buttons{
+        margin-top:10px;
+        text-align:center;
+    }
+
+    .navbar-toggler{
+        border:none !important;
+        box-shadow:none !important;
+    }
+}
+
+
+
+@media (max-width:768px){
+
+    .navbar-buttons{
+        display:none !important;
+    }
+
+}
+
+
+
+@media (max-width:768px){
+
+    /* إخفاء الأزرار العلوية */
+    .navbar-buttons{
+        display:none !important;
+    }
+
+    /* إخفاء الروابط من الشريط */
+    .navbar-nav{
+        display:none !important;
+    }
+
+    /* إظهار القائمة عند فتح الهامبرغر */
+    .navbar-collapse.show .navbar-nav{
+        display:flex !important;
+        flex-direction:column;
+        gap:10px;
+    }
+
+    .navbar-collapse.show .navbar-buttons{
+        display:block !important;
+        margin-top:15px;
+    }
+}
+
+
+/* Hamburger caché sur PC */
+.navbar-toggler{
+    display:none;
+    background:none;
+    border:none;
+    cursor:pointer;
+}
+
+/* Icône hamburger */
+.hamburger{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+}
+
+.hamburger span{
+    width:28px;
+    height:3px;
+    background:#0f172a;
+    border-radius:5px;
+}
+
+/* Mobile */
+@media (max-width:768px){
+
+    .navbar{
+        position:relative;
+    }
+
+    .navbar-toggler{
+        display:block;
+    }
+
+    .nav-links{
+        display:none;
+        position:absolute;
+        top:80px;
+        left:0;
+        width:100%;
+        background:white;
+        padding:20px;
+        box-shadow:0 10px 30px rgba(0,0,0,.08);
+        flex-direction:column;
+        gap:15px;
+        z-index:999;
+    }
+
+    .nav-links.active{
+        display:flex;
+    }
+}
+
+
+
+@media (max-width:768px){
+
+    .hero-container{
+        padding:40px 20px;
+        text-align:center;
+        min-height:auto;
+    }
+
+    .hero-text{
+        width:100%;
+        max-width:100%;
+    }
+
+    .hero-text h1{
+        font-size:42px;
+        line-height:1.1;
+        margin-bottom:20px;
+    }
+
+    .hero-text p{
+        font-size:16px;
+        line-height:1.7;
+        margin-bottom:30px;
+    }
+
+    .hero-buttons{
+        display:flex;
+        flex-direction:column;
+        gap:15px;
+        align-items:center;
+    }
+
+    .hero-buttons a{
+        width:100%;
+        max-width:320px;
+        text-align:center;
+    }
+
+}
+
+@media (max-width: 992px){
+
+    .hero-container{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .hero-card{
+        width:100%;
+        max-width:500px;
+        margin-top:30px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+<nav class="navbar">
+
+    <div class="logo">
+        RA9MANA Clinic
+    </div>
+
+    <!-- Bouton Hamburger -->
+    <button class="navbar-toggler" onclick="toggleMenu()">
+
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+    </button>
+
+    <!-- Menu -->
+    <div class="nav-links" id="mobileMenu">
+
+        <a href="#services">Services</a>
+        <a href="#advantages">Avantages</a>
+        <a href="#contact">Contact</a>
+
+        <a href="/login" class="btn btn-outline">
+            Se connecter
+        </a>
+
+        <a href="/contact" class="btn btn-primary">
+            Demander un compte
+        </a>
+
+    </div>
+
+</nav>
+
+
+<section class="hero">
+
+<div class="hero-container">
+
+<div class="hero-text">
+
+<h1>
+La médecine.
+Réinventée.
+</h1>
+
+<p>
+Une plateforme numérique moderne dédiée aux professionnels
+de santé pour simplifier la gestion quotidienne,
+réduire les tâches administratives et accélérer la création
+des documents médicaux.
+</p>
+
+<div class="hero-buttons">
+
+<a href="/login" class="btn btn-primary">
+Se connecter
+</a>
+
+<a href="/contact" class="btn btn-outline">
+Demander un compte
+</a>
+
+</div>
+
+</div>
+
+<div class="hero-card">
+
+<h3>🚀 Pourquoi RA9MANA Clinic ?</h3>
+
+<p>
+Plus de technologie.
+Moins d’administration.
+Plus de temps pour vos patients.
+Une conformité juridique et numérique renforcée.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="stats">
+
+<div class="stats-grid">
+
+<div class="stat-card">
+🏥
+<h2>+150</h2>
+<p>Professionnels accompagnés</p>
+</div>
+
+<div class="stat-card">
+📄
+<h2>+50 000</h2>
+<p>Documents générés</p>
+</div>
+
+<div class="stat-card">
+⚡
+<h2>70%</h2>
+<p>Gain de temps administratif</p>
+</div>
+
+<div class="stat-card">
+🔒
+<h2>100%</h2>
+<p>Conforme aux bonnes pratiques numériques</p>
+</div>
+
+</div>
+
+</section>
+
+<section class="section" id="services">
+
+<div class="section-title">
+<h2>Nos services</h2>
+</div>
+
+<div class="grid">
+
+<div class="card">
+<h3>💊 MEDORA</h3>
+<p>Création intelligente d’ordonnances médicales.</p>
+</div>
+
+<div class="card">
+<h3>🧪 LABIA</h3>
+<p>Demandes d’analyses biologiques rapides et sécurisées.</p>
+</div>
+
+<div class="card">
+<h3>🩻 IMEDIX</h3>
+<p>Création de demandes d’imagerie médicale.</p>
+</div>
+
+<div class="card">
+<h3>⚖️ LEGAL CARE</h3>
+<p>Accompagnement juridique et numérique.</p>
+</div>
+
+</div>
+
+</section>
+
+<section class="section" id="advantages">
+
+<div class="section-title">
+<h2>Pourquoi nous choisir ?</h2>
+</div>
+
+<div class="grid">
+
+<div class="card"><h3>⚡ Rapidité</h3><p>Réduction du temps administratif.</p></div>
+
+<div class="card"><h3>🔒 Sécurité</h3><p>Protection avancée des données.</p></div>
+
+<div class="card"><h3>⚖️ Conformité</h3><p>Développé avec des spécialistes du droit numérique.</p></div>
+
+<div class="card"><h3>🤝 Support</h3><p>Assistance rapide et accompagnement.</p></div>
+
+</div>
+
+</section>
+
+<section class="contact" id="contact">
+
+<div class="section-title">
+<h2>Contact</h2>
+</div>
+
+<div class="contact-grid">
+
+<div class="contact-card">
+<h3>📞 Téléphone</h3>
+<p>+213 XX XX XX XX</p>
+</div>
+
+<div class="contact-card">
+<h3>📧 Email</h3>
+<p>contact@ra9mana-clinic.com</p>
+</div>
+
+<div class="contact-card">
+<h3>📍 Adresse</h3>
+<p>Constantine - Algérie</p>
+</div>
+
+<div class="contact-card">
+<h3>🕒 Horaires</h3>
+<p>08:00 - 17:00</p>
+</div>
+
+</div>
+
+</section>
+
+<footer class="footer">
+
+<h2>RA9MANA Clinic</h2>
+
+<p>
+Technologie • Santé • Conformité
+</p>
+
+<p>
+© 2026 Tous droits réservés
+</p>
+
+</footer>
+<script>
+function toggleMenu() {
+    document.getElementById("mobileMenu")
+            .classList.toggle("active");
+}
+</script>
+</body>
+</html>
+
+
