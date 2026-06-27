@@ -9,9 +9,9 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0" />
 
-    <title>
-        Prescription Médicale
-    </title>
+        <title>
+          Demande d'Imagerie Médicale
+      </title>
 
 
     <!-- CSS -->
@@ -960,15 +960,15 @@ border-radius: 0px;
 
     <div class="hero-content">
 
-        <h1>
-            Demande d'Analyses Médicales
-        </h1>
+      <h1>
+    Demande d'Examens Radiologiques
+</h1>
 
-        <p>
-            Créez, prévisualisez et imprimez
-            vos demandes d'analyses médicales
-            en quelques secondes.
-        </p>
+<p>
+    Créez, prévisualisez et imprimez
+    vos demandes d'examens radiologiques
+    en quelques secondes.
+</p>
 
     </div>
 
@@ -985,11 +985,11 @@ border-radius: 0px;
     <div class="form-section">
 
         <h1>
-            Demande d'Analyses Médicales
+          Demande d'Examens Radiologiques
         </h1>
 
         <div class="subtitle">
-            Générateur professionnel de demandes d'analyses
+          Générateur professionnel de demandes d'examens d'imagerie
         </div>
 
 
@@ -1060,7 +1060,7 @@ border-radius: 0px;
                 <input
                     type="text"
                     id="medications"
-                    placeholder="Rechercher une analyse..."
+                    placeholder="Rechercher un examen d'imagerie..."
                 />
 
 
@@ -1078,7 +1078,7 @@ border-radius: 0px;
                 <hr style="margin:20px 0">
 
                 <h3>
-                    Mes modèles d'analyses
+                  Mes modèles d'imagerie
                 </h3>
 
                 <div id="templatesContainer"></div>
@@ -1110,48 +1110,51 @@ border-radius: 0px;
 
     <section class="features">
 
-        <div class="feature-card">
+      <div class="feature-card">
 
-            <h3>
-                Demandes Professionnelles
-            </h3>
+          <h3>
+              Demandes d'Imagerie Professionnelles
+          </h3>
 
-            <p>
-                Génération automatique de demandes
-                d'analyses prêtes à l'impression.
-            </p>
+          <p>
+              Génération automatique de demandes
+              d'examens d'imagerie médicale
+              prêtes à l'impression.
+          </p>
 
-        </div>
-
-
-        <div class="feature-card">
-
-            <h3>
-                Aperçu Instantané
-            </h3>
-
-            <p>
-                Visualisez chaque modification
-                avant l'impression de la demande.
-            </p>
-
-        </div>
+      </div>
 
 
-        <div class="feature-card">
+      <div class="feature-card">
 
-            <h3>
-                Gain de Temps
-            </h3>
+          <h3>
+              Aperçu Instantané
+          </h3>
 
-            <p>
-                Réduisez le temps de préparation
-                des demandes d'analyses.
-            </p>
+          <p>
+              Visualisez chaque modification
+              avant l'impression de votre
+              demande d'imagerie.
+          </p>
 
-        </div>
+      </div>
 
-    </section>
+
+      <div class="feature-card">
+
+          <h3>
+              Gain de Temps
+          </h3>
+
+          <p>
+              Préparez rapidement vos demandes
+              d'imagerie médicale avec une
+              mise en page professionnelle.
+          </p>
+
+      </div>
+
+  </section>
 
 
 
@@ -1164,11 +1167,13 @@ border-radius: 0px;
 
     <div id="prescriptionTemplate">
 
-<img
+
+    <img
     src="{{ url_for('static', filename='templates/prescription-template.png') }}"
     class="template-bg"
     alt="Demande d'Analyses Template"
 />
+
 
         <!-- PATIENT -->
 
@@ -1234,7 +1239,7 @@ border-radius: 0px;
     <!-- ===================================== -->
     <!-- LIBRARIES -->
     <!-- ===================================== -->
-    <script src="{{ url_for('static', filename='libraries/html2canvas.min.js') }}"></script>
+   <script src="{{ url_for('static', filename='libraries/html2canvas.min.js') }}"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
@@ -1263,7 +1268,7 @@ function saveTemplates(){
 
       if(selectedMedications.length===0){
 
-          alert("Ajoutez au moins une analyse.");
+          alert("Ajoutez au moins un examen d'imagerie.");
 
           return;
 
@@ -1315,7 +1320,7 @@ function saveTemplates(){
 
             <br>
 
-            ${template.medications.length} analyse(s)
+            ${template.medications.length} examen(s) d'imagerie
 
             <br><br>
 
@@ -1485,7 +1490,7 @@ function saveTemplates(){
     // ===============================
     // Load JSON + merge custom analyses
     // ===============================
-    fetch("static/assets/data/analyses.json")
+    fetch("static/assets/data/imagerie.json")
         .then(res => res.json())
         .then(data => {
 
@@ -1542,7 +1547,7 @@ function saveTemplates(){
       box.innerHTML = `
 
       <h3 class="popup-title">
-          Ajouter une analyse
+        Ajouter un examen d'imagerie
       </h3>
 
       <input
@@ -1636,7 +1641,7 @@ function saveTemplates(){
 
               <div class="med-item"
                    style="justify-content:center;font-weight:700;color:#2563eb;">
-                  ➕ Ajouter une analyse
+                ➕ Ajouter un examen d'imagerie
               </div>
           `;
 
@@ -1715,7 +1720,7 @@ function saveTemplates(){
           const removeBtn =
               document.createElement("button");
 
-          removeBtn.innerText = "🗑";
+          removeBtn.innerText = "✂️";
 
           removeBtn.className = "remove-med";
 
@@ -1785,7 +1790,7 @@ function saveTemplates(){
       "add-med-btn";
 
   addMedBtn.innerText =
-      "OU ➕ Ajouter une analyse manuellement";
+      "OU   ➕ Ajouter un examen d'imagerie";
 
   addMedBtn.type =
       "button";

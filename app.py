@@ -633,6 +633,15 @@ def profile():
     )
 
 
+@app.route('/analyses')
+def analyses():
+
+    return render_template(
+        'account/analyses.html'
+    )
+
+
+
 @app.route('/contact')
 def contact():
 
@@ -653,6 +662,17 @@ def policy():
     return render_template(
         'policy.html'
     )
+
+
+
+
+@app.route('/Imagerie')
+def Imagerie():
+
+    return render_template(
+        'account/Imagerie.html'
+    )
+
 
 
 # =========================

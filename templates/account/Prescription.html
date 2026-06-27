@@ -5,110 +5,2024 @@
 
     <meta charset="UTF-8" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0" />
 
     <title>
         Prescription Médicale
     </title>
 
+
     <!-- CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/form.css') }}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/print.css') }}" />
+
+
+
+
 
     <!-- FONT -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
         rel="stylesheet">
-    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Inter,sans-serif;
+    min-height:100vh;
+    background:
+    linear-gradient(
+    135deg,
+    #f5f9ff,
+    #eef5ff);
+    padding:40px;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+    radial-gradient(
+    circle at top left,
+    rgba(37,99,235,.15),
+    transparent 35%),
+    radial-gradient(
+    circle at bottom right,
+    rgba(14,165,233,.15),
+    transparent 35%);
+    pointer-events:none;
+    z-index:-1;
+}
+
+/* HERO */
+
+.hero{
+    max-width:1400px;
+    margin:0 auto 30px;
+    background:#fff;
+    border-radius:28px;
+    padding:40px;
+    box-shadow:0 15px 50px rgba(15,23,42,.08);
+    border:1px solid rgba(226,232,240,.8);
+}
+
+.hero-content{
+    text-align:center;
+}
+
+.badge{
+    display:inline-block;
+    padding:10px 18px;
+    border-radius:999px;
+    background:#eef5ff;
+    color:#2563eb;
+    font-weight:600;
+    margin-bottom:15px;
+}
+
+.hero h1{
+    font-size:42px;
+    margin-bottom:15px;
+    color:#0f172a;
+}
+
+.hero p{
+    max-width:700px;
+    margin:auto;
+    color:#64748b;
+    line-height:1.8;
+}
+
+.hero-stats{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    margin-top:30px;
+    flex-wrap:wrap;
+}
+
+.stat{
+    background:#f8fafc;
+    border-radius:18px;
+    padding:18px 25px;
+    min-width:120px;
+}
+
+.stat span{
+    display:block;
+    font-size:24px;
+    margin-bottom:8px;
+}
+
+/* LAYOUT */
+
+.container{
+    max-width:1400px;
+    margin:auto;
+    display:flex;
+    flex-direction:column;
+    gap:30px;
+}
+
+/* CARDS */
+
+.form-section,
+.preview-section,
+.features{
+    background:#fff;
+    border-radius:28px;
+    padding:35px;
+    box-shadow:0 20px 60px rgba(15,23,42,.08);
+    border:1px solid #dbe7f5;
+}
+
+/* FORM */
+
+.form-section h1{
+    font-size:32px;
+    color:#0f172a;
+    margin-bottom:8px;
+}
+
+.subtitle{
+    color:#64748b;
+    margin-bottom:30px;
+}
+
+form{
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(280px,1fr));
+    gap:18px;
+}
+
+.medications-box{
+    grid-column:1/-1;
+    position:relative;
+    padding:18px;
+    background:#f8fbff;
+    border:2px dashed #c9dcff;
+    border-radius:20px;
+}
+
+#generateBtn{
+    grid-column:1/-1;
+    margin-top:10px;
+    height:60px;
+    border:none;
+    border-radius:18px;
+    background:
+    linear-gradient(
+    135deg,
+    #2563eb,
+    #0ea5e9);
+    color:white;
+    font-size:16px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.25s;
+    box-shadow:0 10px 25px rgba(37,99,235,.25);
+}
+
+#generateBtn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 15px 35px rgba(37,99,235,.35);
+}
+
+input,
+select{
+    height:58px;
+    border:2px solid #dbe7f5;
+    border-radius:16px;
+    background:#fff;
+    padding:0 18px;
+    font-size:15px;
+    color:#0f172a;
+    transition:.25s;
+    box-shadow:0 4px 12px rgba(15,23,42,.03);
+}
+
+input:hover,
+select:hover{
+    border-color:#c8d8ec;
+}
+
+input:focus,
+select:focus{
+    outline:none;
+    border-color:#cfd8e3;
+    box-shadow:
+    0 0 0 4px rgba(148,163,184,.15);
+}
+
+.selected-meds{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:12px;
+}
+
+.selected-meds span{
+    background:#2563eb;
+    color:#fff;
+    padding:8px 12px;
+    border-radius:999px;
+    font-size:13px;
+}
+
+.features{
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.feature-card{
+    background:#fff;
+    border:1px solid #e2e8f0;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 8px 20px rgba(15,23,42,.04);
+}
+
+.feature-card h3{
+    color:#2563eb;
+    margin-bottom:10px;
+}
+
+.feature-card p{
+    color:#64748b;
+    line-height:1.7;
+}
+
+/* PREVIEW */
+
+.preview-section{
+    display:flex;
+    justify-content:center;
+}
+
+#prescriptionTemplate{
+    width:100%;
+    max-width:1500px;
+    position:relative;
+}
+
+.template-bg{
+    width:100%;
+    display:block;
+    border-radius:0px;
+    box-shadow:0 10px 40px rgba(0,0,0,.1);
+}
+
+.overlay{
+    position:absolute;
+}
+
+.med-overlay{
+    display:none;
+}
+
+@media(max-width:768px){
+
+    body{
+        padding:20px;
+    }
+
+    .hero h1{
+        font-size:30px;
+    }
+
+    form{
+        grid-template-columns:1fr;
+    }
+
+}
 
 
+
+/* =======================================================
+   POPUP
+======================================================= */
+
+.popup-title{
+
+    font-size:24px;
+    font-weight:700;
+    color:#0f172a;
+
+    text-align:center;
+
+    margin-bottom:20px;
+}
+
+.popup-input{
+
+    width:100%;
+    height:58px;
+
+    margin:10px 0;
+
+    padding:0 18px;
+
+    border:2px solid #dbe7f5;
+    border-radius:16px;
+
+    background:#fff;
+
+    color:#0f172a;
+
+    font-size:15px;
+
+    transition:.25s;
+
+    box-shadow:
+    0 5px 15px rgba(15,23,42,.05);
+
+}
+
+.popup-input:hover{
+
+    border-color:#bfd6ff;
+
+}
+
+.popup-input:focus{
+
+    outline:none;
+
+    border-color:#d4dce6;
+
+    box-shadow:
+    0 0 0 4px rgba(148,163,184,.12);
+
+}
+
+.popup-btn{
+
+    width:100%;
+    height:58px;
+
+    margin-top:18px;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:
+    linear-gradient(
+    135deg,
+    #2563eb,
+    #0ea5e9);
+
+    color:#fff;
+
+    font-size:16px;
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    box-shadow:
+    0 10px 25px rgba(37,99,235,.25);
+
+}
+
+.popup-btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+    0 15px 35px rgba(37,99,235,.35);
+
+}
+
+
+/* =======================================================
+   ADD MED BUTTON
+======================================================= */
+
+.add-med-btn{
+
+    height:58px;
+
+    padding:0 22px;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:
+    linear-gradient(
+    135deg,
+    #2563eb,
+    #0ea5e9);
+
+    color:#fff;
+
+    font-size:14px;
+    font-weight:700;
+
+    cursor:pointer;
+
+    white-space:nowrap;
+
+    transition:.25s;
+
+    box-shadow:
+    0 8px 20px rgba(37,99,235,.25);
+
+}
+
+.add-med-btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+    0 15px 35px rgba(37,99,235,.35);
+
+}
+
+
+
+/* =======================================================
+   DARK OVERLAY
+======================================================= */
+
+.med-overlay{
+
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.60);
+
+    backdrop-filter:blur(5px);
+
+    z-index:9998;
+
+}
+
+
+
+/* =======================================================
+   MEDICATION LIST
+======================================================= */
+
+.medications-list{
+
+    display:none;
+
+    position:fixed;
+
+    top:50%;
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:720px;
+    max-width:92vw;
+
+    max-height:70vh;
+
+    overflow-y:auto;
+
+    padding:18px;
+
+    background:#fff;
+
+    border-radius:24px;
+
+    box-shadow:
+    0 40px 120px rgba(0,0,0,.45);
+
+    z-index:9999;
+
+}
+
+
+
+.med-item{
+
+    display:flex;
+
+    align-items:center;
+
+    padding:18px;
+
+    margin-bottom:12px;
+
+    background:#fff;
+
+    border:1px solid #e5edf7;
+
+    border-radius:16px;
+
+    font-size:15px;
+    font-weight:600;
+
+    color:#0f172a;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+
+
+.med-item:hover{
+
+    background:#eef5ff;
+
+    border-color:#2563eb;
+
+    transform:translateY(-2px);
+
+    box-shadow:
+    0 10px 25px rgba(37,99,235,.18);
+
+}
+
+
+
+.med-empty{
+
+    text-align:center;
+
+    padding:30px;
+
+    color:#64748b;
+
+    font-weight:600;
+
+}
+
+
+
+/* =======================================================
+   SELECTED MEDICATION
+======================================================= */
+
+.selected-med{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:12px 16px;
+
+    margin-top:10px;
+
+    border-radius:14px;
+
+    background:#fff;
+
+    border:1px solid #dbe7f5;
+
+}
+
+
+
+.remove-med{
+
+    width:38px;
+
+    height:38px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#ef4444;
+
+    color:white;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    transition:.25s;
+
+}
+
+.remove-med:hover{
+
+    background:#dc2626;
+
+    transform:scale(1.05);
+
+}
+
+
+.barcode{
+
+    position:absolute;
+
+    left:520px;
+    top:940px;
+
+    width:220px;
+
+    height:70px;
+
+    background:white;
+
+    border-radius:6px;
+
+    padding:6px;
+
+    box-sizing:border-box;
+
+}
+
+
+
+.template-card{
+
+    background:white;
+
+    border:1px solid #dbe7f5;
+
+    border-radius:18px;
+
+    padding:18px;
+
+    margin-top:15px;
+
+    box-shadow:0 8px 18px rgba(0,0,0,.05);
+
+}
+
+.use-template,
+.delete-template{
+
+    margin-top:10px;
+
+    padding:10px 18px;
+
+    border:none;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+}
+
+.use-template{
+
+    background:#2563eb;
+
+    color:white;
+
+    margin-right:8px;
+
+}
+
+.delete-template{
+
+    background:#f3f4f6;
+
+    color:#333;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#patientName{
+    grid-column:span 2;
+}
+
+/* ======================================
+   PRESCRIPTION TEMPLATE
+====================================== */
+
+#prescriptionTemplate{
+
+    width:794px;
+    height:1123px;
+
+    position:relative;
+
+    background:white;
+
+    overflow:hidden;
+
+    border-radius:0px;
+
+    border:1px solid #e5e7eb;
+
+    box-shadow:
+        0 25px 60px rgba(0,0,0,0.08);
+}
+
+
+/* ======================================
+   BACKGROUND TEMPLATE
+====================================== */
+
+.template-bg{
+
+    width:100%;
+    height:100%;
+
+    position:absolute;
+
+    inset:0;
+
+    object-fit:cover;
+}
+
+
+/* ======================================
+   GLOBAL OVERLAY STYLE
+====================================== */
+
+.overlay{
+
+    position:absolute;
+
+    color:#0f172a;
+
+    font-family:'Inter',sans-serif;
+
+    font-size:20px;
+
+    font-weight:500;
+
+    line-height:1.7;
+
+    white-space:pre-line;
+}
+
+
+/* ======================================
+   DOCTOR
+====================================== */
+
+.doctor-name{
+
+    top:120px;
+    left:120px;
+
+    font-size:24px;
+
+    font-weight:700;
+
+    color:#1e40af;
+}
+
+
+/* ======================================
+   PATIENT
+====================================== */
+
+.patient-name{
+
+    top:227px;
+    left:238px;
+
+    font-size:20px;
+}
+
+
+.patient-age{
+
+    top:304px;
+    left:105px;
+
+    font-size:20px;
+}
+
+
+.patient-gender{
+
+    top:304px;
+    left:315px;
+
+    font-size:20px;
+}
+
+
+/* ======================================
+   MEDICATIONS
+====================================== */
+.medications {
+    top: 387px;
+    right: 11px;
+    width: 560px;
+
+    position: absolute;
+
+    /* 🔥 أهم سطر */
+    height: 250px;
+    overflow: hidden;
+
+    font-size: 18px;
+    line-height: 1.8;
+
+    white-space: pre-line;
+}
+/* ======================================
+   DATE
+====================================== */
+
+.date{
+
+  top:306px;
+  left:625px;
+    font-size:18px;
+
+    color:#475569;
+}
+
+
+/* ======================================
+   PRINT MODE
+====================================== */
+
+@media print{
+
+    body{
+        background:white;
+    }
+
+    #prescriptionTemplate{
+
+        box-shadow:none;
+
+        border:none;
+
+        border-radius:0;
+    }
+
+    .form-section{
+        display:none;
+    }
+
+    .preview-section{
+        width:100%;
+    }
+}
+
+
+/* ===========================
+   BARCODE
+=========================== */
+.barcode{
+
+    position:absolute;
+
+    left:15px;
+    top:1070px;
+
+    width:230px;
+
+    height:35px;
+
+    background:white;
+
+border-radius: 0px;
+
+    padding:6px;
+
+    box-sizing:border-box;
+
+}
+
+</style>
 </head>
 
-<body>
-
-    <div class="container">
-
-        <!-- FORM SECTION -->
-        <div class="form-section">
-
-            <h1>Prescription Médicale</h1>
-
-            <div class="subtitle">
-                Générateur professionnel de prescriptions
-            </div>
-
-            <form id="prescriptionForm">
-
-                <input type="text" id="doctorName" placeholder="Nom du médecin" required />
-
-                <input type="text" id="patientName" placeholder="Nom et prénom du patient" required />
-
-                <input type="number" id="patientAge" placeholder="Âge" required />
-
-                <select id="patientGender" required>
-                    <option value="">Sexe</option>
-                    <option value="Homme">Homme</option>
-                    <option value="Femme">Femme</option>
-                </select>
-
-                <div class="medications-box">
-
-                    <input type="text" id="medications" placeholder="Rechercher un médicament..." />
-
-                    <div id="medicationsList" class="medications-list"></div>
-
-                    <div id="selectedMeds" class="selected-meds"></div>
-
-                </div>
-
-                <button type="button" id="generateBtn">
-                    Générer PDF
-                </button>
-
-            </form>
-
-        </div>
-
-        <!-- PREVIEW SECTION -->
-        <div class="preview-section">
-
-            <div id="prescriptionTemplate">
-
-                <img
-                    src="{{ url_for('static', filename='assets/templates/prescription-template.png') }}"
-                    class="template-bg"
-                    alt="Prescription Template" />
-
-                <div class="overlay doctor-name" id="previewDoctorName"></div>
-                <div class="overlay patient-name" id="previewPatientName"></div>
-                <div class="overlay patient-age" id="previewPatientAge"></div>
-                <div class="overlay patient-gender" id="previewPatientGender"></div>
-                <div class="overlay medications" id="previewMedications"></div>
-                <div class="overlay date" id="previewDate"></div>
-
-            </div>
-
-        </div>
-
-    </div>
-
+<body> <div class="med-overlay" onclick="closeMedList()"></div> <header class="hero"> <div class="hero-content"> <h1> Prescription Médicale Numérique </h1> <p> Créez, prévisualisez et imprimez vos ordonnances professionnelles en quelques secondes. </p> </div> </header> <div class="container"> <!-- ===================================== --> <!-- FORM SECTION --> <!-- ===================================== --> <div class="form-section"> <h1> Prescription Médicale </h1> <div class="subtitle"> Générateur professionnel de prescriptions </div> <!-- ===================================== --> <!-- (Préparation pour les modèles) --> <!-- ===================================== --> <div class="template-toolbar"> </div> <form id="prescriptionForm"> <!-- MÉDECIN --> <!-- PATIENT --> <input type="text" id="patientName" placeholder="Nom et prénom du patient" required /> <!-- AGE --> <input type="number" id="patientAge" placeholder="Âge" required /> <!-- SEXE --> <select id="patientGender" required> <option value=""> Sexe </option> <option value="Homme"> Homme </option> <option value="Femme"> Femme </option> </select> <!-- ===================================== --> <!-- MÉDICAMENTS --> <!-- ===================================== --> <div class="medications-box"> <input type="text" id="medications" placeholder="Rechercher un médicament..." /> <div id="medicationsList" class="medications-list"> </div> <div id="selectedMeds" class="selected-meds"> </div> <hr style="margin:20px 0"> <h3> Mes modèles </h3> <div id="templatesContainer"></div> </div> <!-- GENERATE PDF --> <div id="templatesContainer"> <!-- سيتم ملؤها بالجافاسكربت --> <div id="templatesContainer"></div> </div> <button type="button" id="generateBtn"> Générer PDF </button> </form> </div> <!-- FEATURES --> <section class="features"> <div class="feature-card"> <h3> Ordonnances Professionnelles </h3> <p> Génération automatique avec mise en page prête à l'impression. </p> </div> <div class="feature-card"> <h3> Aperçu Instantané </h3> <p> Visualisez chaque modification avant la génération du PDF. </p> </div> <div class="feature-card"> <h3> Gain de Temps </h3> <p> Réduisez le temps de rédaction des prescriptions. </p> </div> </section> <!-- ===================================== --> <!-- PREVIEW --> <!-- ===================================== --> <div class="preview-section"> <div id="prescriptionTemplate"> <img
+    src="{{ url_for('static', filename='templates/prescription-template.png') }}"
+    class="template-bg"
+    alt="Demande d'Analyses Template"
+/>
+ <!-- DOCTOR --> <!-- PATIENT --> <div class="overlay patient-name" id="previewPatientName"> </div> <div class="overlay patient-age" id="previewPatientAge"> </div> <div class="overlay patient-gender" id="previewPatientGender"> </div> <!-- MEDICATIONS --> <div class="overlay medications" id="previewMedications"> </div> <!-- DATE --> <div class="overlay date" id="previewDate"> </div> <!-- ================================ --> <!-- BARCODE --> <!-- ================================ --> <svg id="barcode" class="overlay barcode"> </svg> <!-- CODE SOUS LE BARCODE --> <div id="barcodeText" class="overlay barcode-text"> </div> </div> </div> </div>
+    <!-- ===================================== -->
     <!-- LIBRARIES -->
-    <script src="{{ url_for('static', filename='libraries/html2canvas.min.js') }}"></script>
+    <!-- ===================================== -->
+  <script src="{{ url_for('static', filename='libraries/html2canvas.min.js') }}"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-    <!-- SCRIPTS -->
-    <script src="{{ url_for('static', filename='scripts/formHandler.js') }}"></script>
 
-    <script src="{{ url_for('static', filename='scripts/templateRenderer.js') }}"></script>
 
-    <script src="{{ url_for('static', filename='scripts/pdfGenerator.js') }}"></script>
 
-    <script src="{{ url_for('static', filename='scripts/app.js') }}"></script>
+
+    <script>
+    function savePrescriptionTemplate(){
+
+      if(selectedMedications.length===0){
+
+          alert("Ajoutez au moins un médicament.");
+
+          return;
+
+      }
+
+      const name =
+          prompt("Nom du modèle :");
+
+      if(!name)
+          return;
+
+      prescriptionTemplates.push({
+
+          id:Date.now(),
+
+          name:name,
+
+          medications:
+              JSON.parse(
+                  JSON.stringify(selectedMedications)
+              )
+
+      });
+
+      saveTemplates();
+
+      renderTemplates();
+
+    }
+
+
+    function renderTemplates(){
+
+        const container =
+            document.getElementById("templatesContainer");
+
+        container.innerHTML="";
+
+        prescriptionTemplates.forEach(template=>{
+
+            const card =
+                document.createElement("div");
+
+            card.className="template-card";
+
+            card.innerHTML=`
+
+            <strong>${template.name}</strong>
+
+            <br>
+
+            ${template.medications.length} médicament(s)
+
+            <br><br>
+
+            <button class="use-template">
+
+            Utiliser
+
+            </button>
+
+            <button class="delete-template">
+
+            Supprimer
+
+            </button>
+
+            `;
+
+            //----------------------------------
+
+            card.querySelector(".use-template")
+                .onclick=()=>{
+
+                selectedMedications=
+                    JSON.parse(
+                        JSON.stringify(
+                            template.medications
+                        )
+                    );
+
+                renderSelectedMedications();
+
+            };
+
+            //----------------------------------
+
+            card.querySelector(".delete-template")
+                .onclick=()=>{
+
+                if(!confirm("Supprimer ?"))
+                    return;
+
+                prescriptionTemplates=
+                    prescriptionTemplates.filter(
+
+                        t=>t.id!==template.id
+
+                    );
+
+                saveTemplates();
+
+                renderTemplates();
+
+            };
+
+            //----------------------------------
+
+            container.appendChild(card);
+
+        });
+
+    }
+
+    </script>
+
+
+
+
+
+<script>
+function renderPrescription(data) {
+
+
+
+    document.getElementById("previewPatientName")
+        .innerText = data.patientName;
+
+    document.getElementById("previewPatientAge")
+        .innerText = data.patientAge;
+
+    document.getElementById("previewPatientGender")
+        .innerText = data.patientGender;
+
+    // =======================================
+    // 💊 عرض الأدوية بشكل ثابت (حل المشكلة)
+    // =======================================
+
+    const container =
+        document.getElementById("previewMedications");
+
+    // تنظيف المحتوى القديم
+    container.innerHTML = "";
+
+    console.log(data.medications);
+    console.log(typeof data.medications);
+
+    // بناء كل دواء كسطر مستقل
+    data.medications.forEach((med, index) => {
+
+        const row = document.createElement("div");
+
+        row.innerText =
+            `${index + 1}. ${med.name} — ${med.qty} boîtes`;
+
+        container.appendChild(row);
+    });
+
+    document.getElementById("previewDate")
+        .innerText = data.date;
+
+    // =======================================
+    // BARCODE
+    // =======================================
+
+    const barcodeValue =
+        new Date().toISOString()
+        .replace(/[-:.TZ]/g,"")
+        .substring(0,12);
+
+        JsBarcode("#barcode", data.barcode, {
+
+          format:"CODE128",
+
+          width:10,
+
+          height:100,
+
+          margin:0,
+
+          displayValue:false
+
+        });
+
+}
+</script>
+
+
+
+
+
+
+<script>
+
+let medicationsData = [];
+let selectedMedications = [];
+// ===============================
+// Modèles d'ordonnances
+// ===============================
+
+
+
+let prescriptionTemplates =
+    JSON.parse(
+        localStorage.getItem("prescriptionTemplates") || "[]"
+    );
+
+// ===============================
+// Custom medications (LocalStorage)
+// ===============================
+let customMedications =
+    JSON.parse(localStorage.getItem("customMeds") || "[]");
+
+function saveCustomMeds() {
+
+    localStorage.setItem(
+        "customMeds",
+        JSON.stringify(customMedications)
+    );
+}
+
+
+// ===============================
+// Load JSON + merge custom meds
+// ===============================
+fetch("static/assets/data/medications.json")
+    .then(res => res.json())
+    .then(data => {
+
+        medicationsData = [
+            ...data,
+            ...customMedications
+        ];
+    });
+
+
+// ===============================
+const medInput =
+    document.getElementById("medications");
+
+const medList =
+    document.getElementById("medicationsList");
+
+const selectedContainer =
+    document.getElementById("selectedMeds");
+
+
+
+    // =======================================
+    // POPUP: Nombre de boîtes
+    // =======================================
+   function askQuantity(callback) {
+
+    const overlay =
+        document.createElement("div");
+
+    overlay.style.position = "fixed";
+    overlay.style.top = "0";
+    overlay.style.left = "0";
+    overlay.style.width = "100%";
+    overlay.style.height = "100%";
+    overlay.style.background = "rgba(0,0,0,0.5)";
+    overlay.style.display = "flex";
+    overlay.style.justifyContent = "center";
+    overlay.style.alignItems = "center";
+    overlay.style.zIndex = "99999";
+
+    const box =
+        document.createElement("div");
+
+    box.style.background = "white";
+    box.style.padding = "20px";
+    box.style.borderRadius = "10px";
+    box.style.textAlign = "center";
+    box.style.boxShadow =
+        "0 35px 90px rgba(0,0,0,.25)";
+
+    const input =
+        document.createElement("input");
+
+    input.type = "number";
+    input.placeholder = "Nombre de boîtes";
+    input.value = "1";
+    input.style.padding = "10px";
+    input.style.width = "100%";
+
+    const btn =
+        document.createElement("button");
+
+    btn.innerText = "Valider";
+    btn.className = "popup-btn";
+
+    btn.addEventListener("click", () => {
+
+        const value =
+            parseInt(input.value || "1");
+
+        document.body.removeChild(overlay);
+
+        callback(value);
+    });
+
+    input.addEventListener("keydown", (e)=>{
+
+        if(e.key==="Enter"){
+
+            btn.click();
+
+        }
+
+    });
+
+    overlay.addEventListener("click",(e)=>{
+
+        if(e.target===overlay){
+
+            document.body.removeChild(overlay);
+
+        }
+
+    });
+
+    box.addEventListener("click",(e)=>{
+
+        e.stopPropagation();
+
+    });
+
+    box.appendChild(input);
+    box.appendChild(btn);
+
+    overlay.appendChild(box);
+
+    document.body.appendChild(overlay);
+}
+
+
+// =======================================
+// POPUP: Ajouter un médicament
+// =======================================
+function addNewMedicationPopup() {
+
+    const overlay =
+        document.createElement("div");
+
+    overlay.style.position = "fixed";
+    overlay.style.top = "0";
+    overlay.style.left = "0";
+    overlay.style.width = "100%";
+    overlay.style.height = "100%";
+    overlay.style.background = "rgba(0,0,0,0.6)";
+    overlay.style.display = "flex";
+    overlay.style.justifyContent = "center";
+    overlay.style.alignItems = "center";
+    overlay.style.zIndex = "99999";
+
+    const box =
+        document.createElement("div");
+
+    box.style.background = "white";
+    box.style.padding = "20px";
+    box.style.borderRadius = "10px";
+    box.style.width = "600px";
+    box.style.boxShadow =
+        "0 35px 90px rgba(0,0,0,.25)";
+
+    box.innerHTML = `
+
+    <h3 class="popup-title">
+        Ajouter un médicament
+    </h3>
+
+    <input
+        id="newActive"
+        class="popup-input"
+        placeholder="Principe actif"
+    />
+
+    <input
+        id="newBrand"
+        class="popup-input"
+        placeholder="Nom commercial"
+    />
+
+    <input
+        id="newDose"
+        class="popup-input"
+        placeholder="Dosage (Ex : 10MG)"
+    />
+
+    <select
+        id="newForm"
+        class="popup-input"
+    >
+
+        <option value="COMPRIME">
+            COMPRIMÉ
+        </option>
+
+        <option value="SIROP">
+            SIROP
+        </option>
+
+        <option value="INJECTION">
+            INJECTION
+        </option>
+
+    </select>
+
+    <button
+        id="saveMedBtn"
+        class="popup-btn"
+    >
+
+        Ajouter
+
+    </button>
+`;
+
+    overlay.appendChild(box);
+
+    document.body.appendChild(overlay);
+
+    overlay.addEventListener("click",(e)=>{
+
+        if(e.target===overlay){
+
+            document.body.removeChild(overlay);
+
+        }
+
+    });
+
+    box.addEventListener("click",(e)=>{
+
+        e.stopPropagation();
+
+    });
+
+
+    // =======================================
+    // Enregistrer le nouveau médicament
+    // =======================================
+    document
+        .getElementById("saveMedBtn")
+        .addEventListener("click", () => {
+
+            const active =
+                document.getElementById("newActive").value;
+
+            const brand =
+                document.getElementById("newBrand").value;
+
+            const dose =
+                document.getElementById("newDose").value;
+
+            const form =
+                document.getElementById("newForm").value;
+
+            if (!active || !brand)
+                return;
+
+            const fullName =
+                `${active} ${brand} ${dose} ${form}`;
+
+            customMedications.push(fullName);
+
+            saveCustomMeds();
+
+            medicationsData.push(fullName);
+
+            document.body.removeChild(overlay);
+
+            askQuantity((qty) => {
+
+                selectedMedications.push({
+
+                    name: fullName,
+                    qty: qty
+
+                });
+
+                renderSelectedMedications();
+
+                medInput.value = "";
+
+                medList.innerHTML = "";
+            });
+        });
+}
+
+
+
+
+
+    // =======================================
+    // Affichage de la liste des médicaments
+    // =======================================
+    function renderMedicationsList(list) {
+
+    medList.innerHTML = "";
+
+    if (!list.length) {
+
+        medList.innerHTML = `
+            <div class="med-empty">
+                Aucun résultat
+            </div>
+
+            <div class="med-item"
+                 style="justify-content:center;font-weight:700;color:#2563eb;">
+                ➕ Ajouter un médicament
+            </div>
+        `;
+
+        medList.lastElementChild.addEventListener("click", () => {
+
+            closeMedList();
+
+            addNewMedicationPopup();
+
+        });
+
+        return;
+    }
+
+    list.forEach(med => {
+
+        const item =
+            document.createElement("div");
+
+        item.className = "med-item";
+
+        item.innerText = med;
+
+
+        // =======================================
+        // Sélection d'un médicament
+        // =======================================
+        item.addEventListener("click", (e) => {
+
+            e.stopPropagation();
+
+            askQuantity((qty) => {
+
+                selectedMedications.push({
+
+                    name: med,
+                    qty: qty
+
+                });
+
+                renderSelectedMedications();
+
+                medInput.value = "";
+
+                medList.innerHTML = "";
+
+                closeMedList();
+
+            });
+        });
+
+        medList.appendChild(item);
+    });
+}
+    // =======================================
+    // Affichage des médicaments sélectionnés
+    // =======================================
+    function renderSelectedMedications() {
+
+    selectedContainer.innerHTML = "";
+
+    selectedMedications.forEach((med, index) => {
+
+        const row =
+            document.createElement("div");
+
+        row.className = "selected-med";
+
+
+        const text =
+            document.createElement("span");
+
+        text.innerText =
+            `${index + 1}. ${med.name} — ${med.qty} boîte(s)`;
+
+
+        // Bouton supprimer
+        const removeBtn =
+            document.createElement("button");
+
+        removeBtn.innerText = "✂️";
+
+        removeBtn.className = "remove-med";
+
+
+        removeBtn.addEventListener("click", () => {
+
+            selectedMedications.splice(index, 1);
+
+            renderSelectedMedications();
+        });
+
+        row.appendChild(text);
+
+        row.appendChild(removeBtn);
+
+        selectedContainer.appendChild(row);
+    });
+}
+
+
+// =======================================
+// Ouvrir la liste
+// =======================================
+medInput.addEventListener("click", (e) => {
+
+    e.stopPropagation();
+
+    openMedList();
+
+    renderMedicationsList(medicationsData);
+});
+
+
+// =======================================
+// Recherche instantanée
+// =======================================
+medInput.addEventListener("input", () => {
+
+    openMedList();
+
+    const value =
+        medInput.value.toLowerCase();
+
+    const filtered =
+        medicationsData.filter(med =>
+
+            med.toLowerCase().includes(value)
+        );
+
+    renderMedicationsList(filtered);
+});
+
+
+// =======================================
+// Bouton Ajouter un médicament
+// =======================================
+const addMedBtn =
+    document.createElement("button");
+
+addMedBtn.className =
+    "add-med-btn";
+
+addMedBtn.innerText =
+    "OU ➕ Ajouter un médicament manuellement";
+
+addMedBtn.type = "button";
+
+addMedBtn.style.marginTop = "10px";
+
+const selectedMeds =
+    document.getElementById("selectedMeds");
+
+selectedMeds.parentNode.insertBefore(
+    addMedBtn,
+    selectedMeds
+);
+
+addMedBtn.addEventListener(
+    "click",
+    addNewMedicationPopup
+);
+// =======================================
+// Bouton Enregistrer comme modèle
+// =======================================
+
+const saveTemplateBtn =
+    document.createElement("button");
+
+saveTemplateBtn.className =
+    "add-med-btn";
+
+saveTemplateBtn.type = "button";
+
+saveTemplateBtn.style.marginTop = "10px";
+
+saveTemplateBtn.innerText =
+    "💾 Enregistrer comme modèle";
+
+selectedMeds.parentNode.insertBefore(
+    saveTemplateBtn,
+    selectedMeds.nextSibling
+);
+
+saveTemplateBtn.addEventListener(
+    "click",
+    savePrescriptionTemplate
+);
+
+// =======================================
+// Fermer la liste
+// =======================================
+document.addEventListener("click", () => {
+
+    medList.innerHTML = "";
+
+    closeMedList();
+});
+
+
+// =======================================
+// Génération du PDF
+// =======================================
+document
+    .getElementById("generateBtn")
+    .addEventListener("click", async () => {
+
+        const data =
+            getFormData();
+
+        renderPrescription(data);
+
+        await generatePDF();
+    });
+
+
+    // =======================================
+    // Récupération des données
+    // =======================================
+    function getFormData() {
+
+    // =======================================
+    // Code unique du code-barres
+    // =======================================
+
+    const now = new Date();
+
+    const barcodeValue =
+        now.getFullYear().toString() +
+        String(now.getMonth() + 1).padStart(2, "0") +
+        String(now.getDate()).padStart(2, "0") +
+        String(now.getHours()).padStart(2, "0") +
+        String(now.getMinutes()).padStart(2, "0");
+
+    // متغير عام سنستعمله لاحقاً
+    window.currentBarcode = barcodeValue;
+
+    return {
+
+
+
+        patientName:
+            document.getElementById("patientName").value,
+
+        patientAge:
+            document.getElementById("patientAge").value,
+
+        patientGender:
+            document.getElementById("patientGender").value,
+
+        medications:
+            selectedMedications,
+
+        date:
+            new Date().toLocaleDateString("fr-FR"),
+
+        barcode:
+            barcodeValue
+    };
+}
+
+
+// =======================================
+// Coordonnées de l'ordonnance
+// =======================================
+const template =
+    document.getElementById("prescriptionTemplate");
+
+template.addEventListener("click", (e) => {
+
+    const rect =
+        template.getBoundingClientRect();
+
+    const x =
+        e.clientX - rect.left;
+
+    const y =
+        e.clientY - rect.top;
+
+    console.log("X:", x);
+
+    console.log("Y:", y);
+
+});
+</script>
+
+
+
+<script>
+function savePrescriptionTemplate(){
+
+  if(selectedMedications.length===0){
+
+      alert("Ajoutez au moins un médicament.");
+
+      return;
+
+  }
+
+  const name =
+      prompt("Nom du modèle :");
+
+  if(!name)
+      return;
+
+  prescriptionTemplates.push({
+
+      id:Date.now(),
+
+      name:name,
+
+      medications:
+          JSON.parse(
+              JSON.stringify(selectedMedications)
+          )
+
+  });
+
+  saveTemplates();
+
+  renderTemplates();
+
+}
+
+function saveTemplates(){
+
+    localStorage.setItem(
+        "prescriptionTemplates",
+        JSON.stringify(prescriptionTemplates)
+    );
+
+}
+
+function renderTemplates(){
+
+    const container =
+        document.getElementById("templatesContainer");
+
+    container.innerHTML="";
+
+    prescriptionTemplates.forEach(template=>{
+
+        const card =
+            document.createElement("div");
+
+        card.className="template-card";
+
+        card.innerHTML=`
+
+        <strong>${template.name}</strong>
+
+        <br>
+
+        ${template.medications.length} médicament(s)
+
+        <br><br>
+
+        <button class="use-template">
+
+        Utiliser
+
+        </button>
+
+        <button class="delete-template">
+
+        Supprimer
+
+        </button>
+
+        `;
+
+        //----------------------------------
+
+        card.querySelector(".use-template")
+            .onclick=()=>{
+
+            selectedMedications=
+                JSON.parse(
+                    JSON.stringify(
+                        template.medications
+                    )
+                );
+
+            renderSelectedMedications();
+
+        };
+
+        //----------------------------------
+
+        card.querySelector(".delete-template")
+            .onclick=()=>{
+
+            if(!confirm("Supprimer ?"))
+                return;
+
+            prescriptionTemplates=
+                prescriptionTemplates.filter(
+
+                    t=>t.id!==template.id
+
+                );
+
+            saveTemplates();
+
+            renderTemplates();
+
+        };
+
+        //----------------------------------
+
+        container.appendChild(card);
+
+    });
+
+}
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+async function generatePDF() {
+
+    const element =
+        document.getElementById("prescriptionTemplate");
+
+    // انتظار بسيط حتى يتم رسم الباركود
+    await new Promise(resolve =>
+        setTimeout(resolve, 200)
+    );
+
+    const canvas =
+        await html2canvas(element, {
+
+            scale: 4,
+
+            useCORS: true,
+
+            backgroundColor: null
+
+        });
+
+    const imgData =
+        canvas.toDataURL("image/png");
+
+    const pdf =
+        new window.jspdf.jsPDF({
+
+            orientation: "portrait",
+
+            unit: "px",
+
+            format: [794,1123]
+
+        });
+
+    pdf.addImage(
+
+        imgData,
+
+        "PNG",
+
+        0,
+
+        0,
+
+        794,
+
+        1123
+
+    );
+
+    pdf.save("prescription.pdf");
+
+}
+
+</script>
+
+
+
+
+
+<script>
+
+function openMedList(){
+
+    const list =
+        document.querySelector(".medications-list");
+
+    const overlay =
+        document.querySelector(".med-overlay");
+
+    if(list)
+        list.style.display = "block";
+
+    if(overlay)
+        overlay.style.display = "block";
+
+}
+
+
+
+function closeMedList(){
+
+    const list =
+        document.querySelector(".medications-list");
+
+    const overlay =
+        document.querySelector(".med-overlay");
+
+    if(list)
+        list.style.display = "none";
+
+    if(overlay)
+        overlay.style.display = "none";
+
+}
+
+</script>
+
+
+<script>
+  renderTemplates();
+</script>
+
 
 </body>
-
 </html>

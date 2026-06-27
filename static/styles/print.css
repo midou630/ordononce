@@ -113,20 +113,8 @@
    MEDICATIONS
 ====================================== */
 .medications {
-    top: 387px;
-    right: 11px;
-    width: 560px;
-
-    position: absolute;
-
-    /* 🔥 أهم سطر */
-    height: 250px;
-    overflow: hidden;
-
-    font-size: 18px;
-    line-height: 1.8;
-
-    white-space: pre-line;
+   top: 387px;
+     left: 50px;
 }
 /* ======================================
    DATE

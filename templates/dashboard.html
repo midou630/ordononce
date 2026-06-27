@@ -5,6 +5,8 @@
 <title>Dashboard</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+<meta name="theme-color" content="#2563eb">
 
 <style>
 
@@ -595,6 +597,94 @@ p{
         text-align:center;
     }
 } 
+
+
+
+.notif-modal{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+
+    background:rgba(15,23,42,0.35);
+    display:none;
+    z-index:9999;
+}
+
+.notif-panel{
+    position:absolute;
+    top:0;
+    right:0;
+    width:35%;
+    height:100%;
+
+    background:#fff;
+    box-shadow:-10px 0 30px rgba(0,0,0,0.15);
+}
+
+.notif-panel iframe{
+    width:100%;
+    height:100%;
+    border:none;
+}
+
+
+
+
+
+
+.notif-panel{
+    animation:slideIn .25s ease;
+}
+
+@keyframes slideIn{
+    from{ transform:translateX(100%); }
+    to{ transform:translateX(0); }
+}
+
+
+
+
+
+.soon-modal{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+
+    background:rgba(15,23,42,0.4);
+    display:none;
+    align-items:center;
+    justify-content:center;
+
+    z-index:9999;
+}
+
+.soon-box{
+    background:#fff;
+    padding:22px 26px;
+    border-radius:14px;
+    width:320px;
+    text-align:center;
+
+    box-shadow:0 20px 40px rgba(0,0,0,0.15);
+}
+
+.soon-box h3{
+    font-size:18px;
+    margin-bottom:8px;
+    color:#0f172a;
+}
+
+.soon-box p{
+    font-size:13px;
+    color:#64748b;
+}
+
+
+
 </style>
 </head>
 
@@ -603,14 +693,23 @@ p{
 <!-- NAV -->
 <div class="nav">
 
-    <div class="logo">CLINIC360 PRO</div>
+    <div class="logo">RA9MANA</div>
 
     <div class="nav-links">
-        <a href="/home1">  home</a>
-        <a href="/change">Changer mot de passe</a>
-        <a href="/logout">Déconnexion</a>
-      <a href="/home">  Contacter l'assistance</a>
-    <a href="/logout">  Notifications</a>
+        <a href="/home1">  &#127968; home</a>
+        <a href="/change">Changer mot de passe &#128259;</a>
+        <a href="/logout">Déconnexion &#128275; </a>
+      <a href="/contact">Contacter l'assistance  &#128104; </a>
+   <a href="#" onclick="toggleNotif(); return false;">
+   Notifications &#128227; 
+</a>
+
+
+<a href="/contact" onclick="showSoon(event)">
+    Magasin de médecins 
+</a>
+
+
     </div>
 
 </div>
@@ -637,9 +736,9 @@ p{
         <p>À propos de MEDORA 
 &#x1F4D6</p>
 
-       <button class="action-btn" onclick="openPage1()">
-           Créer une ordonnance
-        </button>
+    <button class="action-btn" onclick="openPage1()">
+    Créer une ordonnance
+</button>
     </div>
 
     <!-- CARD 2 -->
@@ -692,6 +791,24 @@ Créer une demande d’analyses
     © 2026 - Plateforme sécurisée professionnelle
 </div>
 
+
+
+<div id="notifModal" class="notif-modal" onclick="outsideClick(event)">
+    
+    <div class="notif-panel">
+        <iframe src="https://notify-hksw.onrender.com/"></iframe>
+    </div>
+
+</div>
+
+
+<div id="soonModal" class="soon-modal" onclick="closeSoon(event)">
+    <div class="soon-box">
+        <h3>Bientôt disponible</h3>
+        <p>Cette fonctionnalité sera disponible prochainement.</p>
+    </div>
+</div>
+
 <script>
 
 // 🔥 Pages dynamiques depuis Flask
@@ -701,8 +818,7 @@ const page3 = "{{ user[7] }}";
 
 function openPage1(){
     if(page1){
-        document.getElementById("popupFrame").src = page1;
-        openPopup();
+        window.location.href = page1;
     } else {
         alert("Page 1 غير مهيأة");
     }
@@ -710,8 +826,7 @@ function openPage1(){
 
 function openPage2(){
     if(page2){
-        document.getElementById("popupFrame").src = page2;
-        openPopup();
+        window.location.href = page2;
     } else {
         alert("Page 2 غير مهيأة");
     }
@@ -719,13 +834,11 @@ function openPage2(){
 
 function openPage3(){
     if(page3){
-        document.getElementById("popupFrame").src = page3;
-        openPopup();
+        window.location.href = page3;
     } else {
         alert("Page 3 غير مهيأة");
     }
 }
-
 function openPopup(){
     document.getElementById("popup").style.display = "block";
 }
@@ -743,6 +856,63 @@ function outsideClose(event){
 }
 
 </script>
+
+<script>
+
+let open = false;
+
+function toggleNotif(){
+    const modal = document.getElementById("notifModal");
+
+    open = !open;
+
+    if(open){
+        modal.style.display = "block";
+    }else{
+        modal.style.display = "none";
+    }
+}
+
+// غلق عند الضغط خارج اللوحة
+function outsideClick(e){
+    const panel = document.querySelector(".notif-panel");
+
+    if(!panel.contains(e.target)){
+        document.getElementById("notifModal").style.display = "none";
+        open = false;
+    }
+}
+
+</script>
+
+
+<script>
+
+function showSoon(e){
+    e.preventDefault();
+    document.getElementById("soonModal").style.display = "flex";
+}
+
+function closeSoon(e){
+    const box = document.querySelector(".soon-box");
+
+    if(!box.contains(e.target)){
+        document.getElementById("soonModal").style.display = "none";
+    }
+}
+
+</script>
+
+<script>
+if ("serviceWorker" in navigator) {
+
+    navigator.serviceWorker.register("/static/service-worker.js")
+        .then(reg => console.log("SW enregistré", reg))
+        .catch(err => console.error("Erreur SW:", err));
+
+}
+</script>
+
 
 </body>
 </html>
